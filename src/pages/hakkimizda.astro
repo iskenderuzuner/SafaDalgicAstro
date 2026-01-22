@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+// İçeriği 'sayfalar' koleksiyonundan 'hakkimizda' ID'si ile çek
+const sayfaVerisi = await getEntry('sayfalar', 'hakkimizda');
+const { Content } = await sayfaVerisi.render();
+const veri = sayfaVerisi.data;
+---
+
+<Layout title={veri.title} description={veri.description}>
+    
+    <section class="page-banner" style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${veri.bannerImage}');`}>
+        <div class="banner-content">
+            <h1>{veri.title}</h1>
+            <p>2002'den Günümüze Güven ve Tecrübe</p>
+        </div>
+    </section>
+
+    <section class="page-content-section">
+        <div class="container">
+            <div class="about-intro-grid">
+                <div class="about-large-img">
+                    <div class="experience-badge">20+ Yıllık Tecrübe</div>
+                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=800&auto=format&fit=crop" alt="Hakkımızda">
+                </div>
+                
+                <div class="about-text-content text-block prose-content">
+                    <Content />
+                </div>
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<style>
+    /* Markdown'dan gelen yazıların stili */
+    .prose-content h2 { color: #004494; font-size: 2rem; margin-bottom: 20px; }
+    .prose-content h3 { color: #333; font-size: 1.5rem; margin-top: 25px; margin-bottom: 10px; }
+    .prose-content p { margin-bottom: 15px; color: #666; }
+</style>

@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+// 1. Tüm hizmet dosyalarını (.md) bul ve yollarını oluştur
+export async function getStaticPaths() {
+  const hizmetler = await getCollection('hizmetler');
+  return hizmetler.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+// 2. Sayfanın verisini al
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Yan menü için tüm hizmetleri tekrar çekelim
+const tumHizmetler = await getCollection('hizmetler');
+// Sıralamaya göre dizelim
+tumHizmetler.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title={entry.data.title} description={entry.data.description}>
+
+    <section class="page-banner" style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${entry.data.image}');`}>
+        <div class="banner-content">
+            <h1>{entry.data.title}</h1>
+            <p>Profesyonel Çözümler ve Garantili Hizmet</p>
+        </div>
+    </section>
+
+    <section class="service-detail-section">
+        <div class="container">
+            <div class="service-layout">
+                
+                <aside class="service-sidebar">
+                    <div class="sidebar-widget">
+                        <h3>Hizmetlerimiz</h3>
+                        <ul>
+                            {tumHizmetler.map(hizmet => (
+                                <li>
+                                    <a href={`/hizmetler/${hizmet.slug}`} class={hizmet.slug === entry.slug ? 'active' : ''}>
+                                        <i class="fas fa-chevron-right"></i> {hizmet.data.title}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-contact-box">
+                        <i class="fas fa-headset"></i>
+                        <h4>Sorularınız mı var?</h4>
+                        <p>Uzman ekibimizden hemen teknik destek alın.</p>
+                        <a href="tel:+905325406829" class="btn-sidebar-call">0532 540 68 29</a>
+                    </div>
+                </aside>
+
+                <article class="service-content-area">
+                    <div class="service-main-img">
+                        <img src={entry.data.image} alt={entry.data.title}>
+                    </div>
+
+                    <div class="prose-content">
+                        <Content />
+                    </div>
+
+                    <div class="cta-box">
+                        <h4>Ücretsiz Keşif İçin Bizi Arayın</h4>
+                        <p>Hizmetlerimiz hakkında detaylı bilgi ve fiyat teklifi almak için bizimle iletişime geçin.</p>
+                        <a href="/iletisim" class="btn btn-primary">TEKLİF ALIN</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<style>
+    .prose-content h2 { color: #004494; font-size: 1.8rem; margin-top: 30px; margin-bottom: 15px; }
+    .prose-content h3 { color: #333; font-size: 1.4rem; margin-top: 25px; margin-bottom: 10px; }
+    .prose-content p { margin-bottom: 15px; line-height: 1.7; color: #555; }
+    .prose-content ul { margin-bottom: 20px; padding-left: 20px; }
+    .prose-content li { margin-bottom: 8px; list-style-type: disc; }
+</style>

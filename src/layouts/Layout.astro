@@ -1,0 +1,121 @@
+---
+import { getEntry } from 'astro:content';
+
+const { title, description } = Astro.props;
+
+// Ayarlar verisini çekiyoruz. Eğer dosya yoksa hata vermesin diye boş obje kontrolü yapıyoruz.
+const genelAyarlar = await getEntry('ayarlar', 'genel');
+// Veri varsa data'yı al, yoksa varsayılan değerleri kullan (Site patlamasın diye önlem)
+const veri = genelAyarlar ? genelAyarlar.data : {
+    telefon: "0532 540 68 29",
+    email: "info@safadalgicpompa.com",
+    adres: "Adres Belirtilmedi",
+    slogan: "Safa Dalgıç Pompa",
+    whatsappLink: "#"
+};
+---
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} | Safa Dalgıç Pompa</title>
+    <meta name="description" content={description}>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-slogan">
+                <i class="fas fa-tools"></i> {veri.slogan}
+            </div>
+            <div class="contact-info">
+                <a href={`tel:${veri.telefon}`}><i class="fas fa-phone"></i> {veri.telefon}</a>
+                <a href={`mailto:${veri.email}`}><i class="fas fa-envelope"></i> {veri.email}</a>
+            </div>
+        </div>
+    </div>
+
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="https://safadalgicpompa.com/wp-content/uploads/2023/01/safa-logo-uzun.png" alt="Safa Dalgıç Pompa">
+                </a>
+            </div>
+            
+            <nav>
+                <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
+                <ul id="menuList">
+                    <li class="mobile-menu-header">
+                        <img src="https://safadalgicpompa.com/wp-content/uploads/2023/01/safa-logo-uzun.png" alt="Safa Logo Mobil">
+                        <i class="fas fa-times" id="menuClose"></i>
+                    </li>
+                    <li><a href="/">Anasayfa</a></li>
+                    <li><a href="/hakkimizda">Hakkımızda</a></li>
+                    <li class="dropdown">
+                        <a href="/#hizmetler" class="dropbtn">Hizmetlerimiz <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="/hizmetler/su-sondaji">Su Sondajı</a></li>
+                            <li><a href="/#hizmetler">Dalgıç Pompa</a></li>
+                            <li><a href="/#hizmetler">Kuyu Temizliği</a></li>
+                            <li><a href="/#hizmetler">Ruhsat Hizmetleri</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/#referanslar">Referanslar</a></li>
+                    <li><a href="/#blog">Blog</a></li>
+                    <li><a href="/iletisim">İletişim</a></li>
+                    <li class="nav-btn-item"><a href="/iletisim" class="btn-nav-cta">TEKLİF AL</a></li>
+                </ul>
+                <div class="menu-overlay" id="menuOverlay"></div>
+            </nav>
+        </div>
+    </header>
+
+    <slot />
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Hakkımızda</h3>
+                    <img src="https://safadalgicpompa.com/wp-content/uploads/2023/01/safa-logo-uzun.png" alt="Safa Logo" class="footer-logo" style="background:white; padding:5px; border-radius:4px;">
+                    <p>"Firmamız Marmara bölgesi genelinde sondaj, sondaj etüdü, dalgıç pompa satış ve servis hizmetleri vermekteyiz."</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Menü</h3>
+                    <ul>
+                        <li><a href="/">Anasayfa</a></li>
+                        <li><a href="/#hizmetler">Hizmetlerimiz</a></li>
+                        <li><a href="/hakkimizda">Hakkımızda</a></li>
+                        <li><a href="/iletisim">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <p><strong>Adres:</strong> {veri.adres}</p>
+                    <p><strong>Tel:</strong> <a href={`tel:${veri.telefon}`}>{veri.telefon}</a></p>
+                    <p><strong>Email:</strong> {veri.email}</p>
+                </div>
+                <div class="footer-col gallery-preview">
+                    <h3>Galeri</h3>
+                    <div class="mini-gallery">
+                        <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=150" alt="">
+                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=150" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Safa Dalgıç Pompa. Tüm Hakları Saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js" is:inline></script>
+</body>
+</html>
