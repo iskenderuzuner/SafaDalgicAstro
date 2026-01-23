@@ -2,227 +2,222 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// --- VERİ ÇEKME İŞLEMLERİ ---
-
-// 1. Hizmetleri Çek ve Sırala
+// Hizmetleri Çek
 const tumHizmetler = await getCollection('hizmetler');
 tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 
-// 2. Slider Verisini Çek ve Sırala
+// YENİ: Slider Verisini Çek ve Sırala
 const sliderVerileri = await getCollection('slider');
 sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
-
-// Slider yoksa gösterilecek varsayılan görsel (Hata önleyici)
-const defaultSliderImage = '/images/slider-bg-1.jpg'; // Buraya projedeki gerçek bir resim yolunu yazabilirsin
 ---
 
-<Layout title="Ana Sayfa" description="Safa Dalgıç Pompa ve Sondaj Sistemleri">
-    
-    <section class="hero-slider-area">
-        <div class="hero-slider-wrapper">
-            
-            {sliderVerileri.length === 0 && (
-                <div class="single-slider-item active" style={`background-image: url('${defaultSliderImage}')`}>
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-8 col-md-10 col-12">
-                                <div class="slider-content-area">
-                                    <h1>Safa Dalgıç Pompa</h1>
-                                    <p>Admin panelinden slider eklemek için /keystatic adresine gidin.</p>
-                                    <div class="slider-btn">
-                                        <a href="/iletisim" class="btn btn-primary">Bize Ulaşın</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
+<Layout title="Anasayfa" description="İstanbul ve çevre illerde su sondajı, kuyu temizliği ve ruhsat hizmetleri. 7/24 Teknik Servis.">
 
-            {sliderVerileri.map((slide, index) => (
-                // İlk slayta 'active' sınıfı eklenir, resim arka plan olarak ayarlanır
-                <div class={`single-slider-item js-dynamic-slide ${index === 0 ? 'active' : ''}`} style={`background-image: url('${slide.data.resim}')`}>
-                    <div class="overlay"></div>
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-8 col-md-10 col-12">
-                                <div class="slider-content-area">
-                                    <h1>{slide.data.title}</h1>
-                                    <p>{slide.data.aciklama}</p>
-                                    <div class="slider-btn">
-                                        <a href="/iletisim" class="btn btn-primary">Hemen Teklif Al <i class="fas fa-arrow-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ))}
-
-            {sliderVerileri.length > 1 && (
-                <div class="slider-arrows-area">
-                    <button class="slider-arrow prev-arrow" id="js-prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="slider-arrow next-arrow" id="js-next-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            )}
-        </div>
-    </section>
-    <section id="hizmetler" class="services-area section-padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8 col-12">
-                    <div class="section-title text-center">
-                        <h2>Hizmetlerimiz</h2>
-                        <p>Sondaj, kuyu ve pompa sistemlerinde anahtar teslim, garantili ve profesyonel çözümler sunuyoruz.</p>
+    <section class="hero-slider">
+        {sliderVerileri.length === 0 && (
+            <div class="slide active" style="background-image: url('/images/default-hero.jpg');">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1>Safa Dalgıç Pompa</h1>
+                        <p>Henüz Admin panelinden slider eklenmedi.</p>
+                        <a href="/iletisim" class="btn">Bize Ulaşın</a>
                     </div>
                 </div>
             </div>
+        )}
+
+        {sliderVerileri.map((slide, index) => (
+            <div class={`slide ${index === 0 ? 'active' : ''}`} style={`background-image: url(${slide.data.resim});`}>
+                <div class="container">
+                    <div class="slide-content">
+                        <h1>{slide.data.title}</h1>
+                        <p>{slide.data.aciklama}</p>
+                        <a href="/iletisim" class="btn">Hemen Teklif Al</a>
+                    </div>
+                </div>
+            </div>
+        ))}
+
+        {sliderVerileri.length > 1 && (
+            <div class="slider-controls">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        )}
+    </section>
+
+    <section id="hakkimizda" class="about-intro-section">
+        <div class="container">
+            <div class="about-intro-grid">
+                <div class="about-large-img">
+                    <div class="experience-badge">20+ Yıllık Tecrübe</div>
+                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/64/uzay-sondaj-su-kuyusu-6411b967.webp" alt="Profesyonel Sondaj Makinesi">
+                </div>
+                <div class="about-text-content">
+                    <h2>Güvenilir Çözüm Ortağınız</h2>
+                    <p class="lead-text">Safa Dalgıç Pompa olarak, suyun olduğu her yerde yanınızdayız. Kaliteli ekipman ve uzman kadromuzla hizmet veriyoruz.</p>
+                    <p>Marmara bölgesinin zorlu zemin koşullarında edindiğimiz tecrübe ile su sondajı, kuyu temizliği ve pompa kurulumunda en yüksek verimi garanti ediyoruz. İş güvenliği standartlarına uygun, modern makine parkurumuzla projelerinizi zamanında teslim ediyoruz.</p>
+                    
+                    <div class="about-work-gallery">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&h=200&fit=crop" alt="Saha Çalışması">
+                        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=300&h=200&fit=crop" alt="Pompa Kurulumu">
+                        <img src="https://images.unsplash.com/photo-1535198255921-274640984859?w=300&h=200&fit=crop" alt="Kuyu Açma">
+                        <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&h=200&fit=crop" alt="Teknik Ekip">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hizmetler" class="services">
+        <div class="container">
+            <h2 class="section-title">Hizmetlerimiz</h2>
+            <p class="section-subtitle">Sondaj, kuyu ve pompa sistemlerinde anahtar teslim çözümler.</p>
             
-            <div class="row">
+            <div class="service-grid">
                 {tumHizmetler.map((hizmet) => (
-                    <div class="col-lg-4 col-md-6 col-12 mb-4">
-                        <div class="single-service-item">
-                            <div class="service-img">
-                                <img src={hizmet.data.image} alt={hizmet.data.title} style="height: 250px; width: 100%; object-fit: cover;">
-                            </div>
-                            <div class="service-content">
-                                <h3>{hizmet.data.title}</h3>
-                                <p>{hizmet.data.description}</p>
-                                <a href={`/hizmetler/${hizmet.slug}`} class="read-more-btn">
-                                    İncele <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
+                    <div class="service-card">
+                        <img src={hizmet.data.image} alt={hizmet.data.title} style="height: 250px; object-fit: cover;">
+                        <div class="service-content">
+                            <h3>{hizmet.data.title}</h3>
+                            <p>{hizmet.data.description}</p>
+                            <a href={`/hizmetler/${hizmet.slug}`} style="color: #004494; font-weight: bold; margin-top: 10px; display: inline-block;">
+                                İncele <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 ))}
+                </div>
+        </div>
+    </section> 
+
+    <section id="referanslar" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Müşteri Yorumları</h2>
+            <p class="section-subtitle">Siz değerli müşterilerimizin güveni, bizim en büyük referansımızdır.</p>
+            
+            <div class="slider-container">
+                <div class="testimonial-slider" id="testimonialSlider">
+                    <div class="testimonial-item">
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"100 metre derinlikte sondaj işimiz vardı. Fatih Bey ve ekibi çok profesyonelce çalıştı. Makine parkurları çok güçlü, işi zamanında teslim ettiler."</p>
+                        <div class="client-name">Fatih Hacıoğlu</div>
+                        <div class="client-title">Fsm İnşaat Group</div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"Kuyumuzun debisi düşmüştü, kuyu temizliği için çağırdık. Eski verimine kavuştu diyebilirim. Temiz işçilik için teşekkürler."</p>
+                        <div class="client-name">Ramazan Çataklı</div>
+                        <div class="client-title">Karadeniz K.Yıkama</div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"Bahçemiz için dalgıç pompa kurulumu yaptırdık. Hem fiyat olarak makuldü hem de çok ilgililer. Satış sonrası destekleri de gayet iyi."</p>
+                        <div class="client-name">Mustafa Yılmaz</div>
+                        <div class="client-title">Villa Sahibi</div>
+                    </div>
+                </div>
+                <button class="prev-btn" onclick="moveSlider(-1)">&#10094;</button>
+                <button class="next-btn" onclick="moveSlider(1)">&#10095;</button>
+            </div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <h2 class="section-title">Blog Yazılarımız</h2>
+            <p class="section-subtitle">Sektörden haberler ve bilgilendirici makaleler.</p>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Su Sondajı Nedir">
+                    <div class="blog-content">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 15 Ocak 2024</span>
+                        <h3>Su Sondajı Nasıl Yapılır?</h3>
+                        <p>Su sondajı işlemi, doğru zemin etüdü ve profesyonel ekipmanlarla yapılmalıdır. İşte aşama aşama sondaj süreci...</p>
+                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Dalgıç Pompa Seçimi">
+                    <div class="blog-content">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 10 Ocak 2024</span>
+                        <h3>Doğru Dalgıç Pompa Seçimi</h3>
+                        <p>Kuyunuzun derinliğine ve su ihtiyacınıza en uygun dalgıç pompayı seçmek, enerji tasarrufu ve uzun ömür sağlar.</p>
+                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Kuyu Bakımı">
+                    <div class="blog-content">
+                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 05 Ocak 2024</span>
+                        <h3>Kuyu Temizliği Neden Önemli?</h3>
+                        <p>Zamanla azalan su verimini artırmak ve pompanızın ömrünü uzatmak için periyodik kuyu temizliği şarttır.</p>
+                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    </Layout>
 
-<script>
-    // Bu script slider oklarının çalışmasını sağlar
-    document.addEventListener('astro:page-load', () => {
-        const slides = document.querySelectorAll('.js-dynamic-slide');
-        const prevBtn = document.getElementById('js-prev-btn');
-        const nextBtn = document.getElementById('js-next-btn');
-        let currentSlide = 0;
+    <section id="iletisim-formu" class="contact-form-section">
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <span class="sub-title">BİZE ULAŞIN</span>
+                    <h3>Projeleriniz İçin<br>Çözüm Üretelim</h3>
+                    <p>Sorularınız, keşif talepleriniz veya fiyat teklifi almak için formu doldurun veya aşağıdaki kanallardan bize hemen ulaşın.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item-box">
+                            <div class="icon-circle"><i class="fas fa-phone"></i></div>
+                            <div class="contact-text">
+                                <span>Bizi Arayın</span>
+                                <strong>0532 540 68 29</strong>
+                            </div>
+                        </div>
+                        <div class="contact-item-box">
+                            <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-text">
+                                <span>E-Posta Gönderin</span>
+                                <strong>info@safadalgicpompa.com</strong>
+                            </div>
+                        </div>
+                        <div class="contact-item-box">
+                            <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-text">
+                                <span>Ofis Adresimiz</span>
+                                <strong>Yenişehir Mh. Osmanlı Bulvarı<br>Ayport Residence Pendik / İst.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                if (i === index) {
-                    slide.classList.add('active');
-                    // CSS'in devreye girmesi için küçük bir tetikleme (Gerekirse)
-                    (slide as HTMLElement).style.opacity = '1'; 
-                    (slide as HTMLElement).style.visibility = 'visible';
-                } else {
-                    slide.classList.remove('active');
-                     // CSS'in devreye girmesi için küçük bir tetikleme
-                    (slide as HTMLElement).style.opacity = '0';
-                    (slide as HTMLElement).style.visibility = 'hidden';
-                }
-            });
-        }
+                <div class="form-box">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Adınız Soyadınız" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Telefon Numaranız" required>
+                        </div>
+                        <div class="form-group">
+                            <select>
+                                <option value="">Hizmet Seçiniz</option>
+                                <option value="sondaj">Su Sondajı</option>
+                                <option value="pompa">Dalgıç Pompa</option>
+                                <option value="bakim">Kuyu Bakımı</option>
+                                <option value="ruhsat">Ruhsat İşlemleri</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Mesajınız" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">GÖNDER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        if (prevBtn && nextBtn && slides.length > 0) {
-            // İlk yüklemede sadece ilk slaytı göster
-             showSlide(currentSlide);
-
-            nextBtn.addEventListener('click', () => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            });
-
-            prevBtn.addEventListener('click', () => {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                showSlide(currentSlide);
-            });
-             // Otomatik geçiş (İsteğe bağlı - 5 saniyede bir)
-            // setInterval(() => {
-            //     currentSlide = (currentSlide + 1) % slides.length;
-            //     showSlide(currentSlide);
-            // }, 5000);
-        }
-    });
-</script>
-
-<style is:global>
-    /* Temel Slider Stilleri (Eğer temanın CSS'i yüklenmezse devreye girer) */
-    .hero-slider-area {
-        position: relative;
-        overflow: hidden;
-    }
-    .hero-slider-wrapper {
-        position: relative;
-        height: 600px; /* Yüksekliği ihtiyaca göre ayarla */
-    }
-    .single-slider-item {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.5s ease-in-out;
-        display: flex;
-        align-items: center;
-    }
-    .single-slider-item.active {
-        opacity: 1;
-        visibility: visible;
-        z-index: 2;
-    }
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5); /* Resim üzerine koyu katman */
-        z-index: 1;
-    }
-    .slider-content-area {
-        position: relative;
-        z-index: 3;
-        color: #fff;
-    }
-    .slider-content-area h1 {
-        font-size: 48px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #fff;
-    }
-    .slider-content-area p {
-        font-size: 18px;
-        margin-bottom: 30px;
-        color: #f1f1f1;
-    }
-    .slider-arrows-area {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        transform: translateY(-50%);
-        z-index: 4;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 30px;
-    }
-    .slider-arrow {
-        background: rgba(255,255,255,0.2);
-        border: none;
-        color: #fff;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        font-size: 20px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    .slider-arrow:hover {
-        background: #004494; /* Tema ana rengi */
-        color: #fff;
-    }
-</style>
+</Layout>
