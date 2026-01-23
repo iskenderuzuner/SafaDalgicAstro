@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-// Hizmetler Şeması
+// 1. HİZMETLER (Makale formatında olduğu için type belirtmeye gerek yok, varsayılan 'content')
 const hizmetler = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -10,8 +10,9 @@ const hizmetler = defineCollection({
   }),
 });
 
-// Slider Şeması
+// 2. SLIDER (Sadece veri içerdiği için type: 'data' OLMALI)
 const slider = defineCollection({
+  type: 'data', // <--- KRİTİK NOKTA BURASI
   schema: z.object({
     title: z.string(),
     aciklama: z.string(),
