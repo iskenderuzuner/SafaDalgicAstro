@@ -2,50 +2,49 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// Hizmetleri Çek
+// 1. Hizmetleri Çek
 const tumHizmetler = await getCollection('hizmetler');
 tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 
-// Slider Verisini Çek ve Sırala
+// 2. Slider Verisini Çek ve Sırala
 const sliderVerileri = await getCollection('slider');
 sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
 ---
 
 <Layout title="Anasayfa" description="İstanbul ve çevre illerde su sondajı, kuyu temizliği ve ruhsat hizmetleri. 7/24 Teknik Servis.">
 
-    <section class="hero-slider">
+    <section id="anasayfa" class="hero-slider">
+        
+        <button class="hero-arrow hero-prev" id="heroPrevBtn"><i class="fas fa-chevron-left"></i></button>
+        <button class="hero-arrow hero-next" id="heroNextBtn"><i class="fas fa-chevron-right"></i></button>
+
         {sliderVerileri.length === 0 && (
-            <div class="slide active" style="background-image: url('/images/default-hero.jpg');">
-                <div class="container">
-                    <div class="slide-content">
-                        <h1>Safa Dalgıç Pompa</h1>
-                        <p>Henüz Admin panelinden slider eklenmedi.</p>
-                        <a href="/iletisim" class="btn">Bize Ulaşın</a>
+            <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=1920&auto=format&fit=crop');">
+                <div class="hero-content">
+                    <h1>Profesyonel Su Sondaj Hizmetleri</h1>
+                    <p>En son teknoloji makinelerimizle su ihtiyacınızı karşılıyoruz.</p>
+                    <div class="hero-cta-buttons">
+                        <a href="tel:+905325406829" class="btn btn-primary"><i class="fas fa-phone"></i> HEMEN ARA</a>
+                        <a href="https://wa.me/905325406829" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
                     </div>
                 </div>
             </div>
         )}
 
         {sliderVerileri.map((slide, index) => (
-            <div class={`slide ${index === 0 ? 'active' : ''}`} style={`background-image: url(${slide.data.resim});`}>
-                <div class="container">
-                    <div class="slide-content">
-                        <h1>{slide.data.title}</h1>
-                        <p>{slide.data.aciklama}</p>
-                        <a href="/iletisim" class="btn">Hemen Teklif Al</a>
+            <div class={`slide ${index === 0 ? 'active' : ''}`} style={`background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('${slide.data.resim}');`}>
+                <div class="hero-content">
+                    <h1>{slide.data.title}</h1>
+                    <p>{slide.data.aciklama}</p>
+                    <div class="hero-cta-buttons">
+                        <a href="tel:+905325406829" class="btn btn-primary"><i class="fas fa-phone"></i> HEMEN ARA</a>
+                        <a href="https://wa.me/905325406829" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
                     </div>
                 </div>
             </div>
         ))}
 
-        {sliderVerileri.length > 1 && (
-            <div class="slider-controls">
-                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        )}
     </section>
-
     <section id="hakkimizda" class="about-intro-section">
         <div class="container">
             <div class="about-intro-grid">
@@ -87,75 +86,6 @@ sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
                         </div>
                     </div>
                 ))}
-            </div>
-        </div>
-    </section> 
-
-    <section id="referanslar" class="testimonials-section">
-        <div class="container">
-            <h2 class="section-title">Müşteri Yorumları</h2>
-            <p class="section-subtitle">Siz değerli müşterilerimizin güveni, bizim en büyük referansımızdır.</p>
-            
-            <div class="slider-container">
-                <div class="testimonial-slider" id="testimonialSlider">
-                    <div class="testimonial-item">
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">"100 metre derinlikte sondaj işimiz vardı. Fatih Bey ve ekibi çok profesyonelce çalıştı. Makine parkurları çok güçlü, işi zamanında teslim ettiler."</p>
-                        <div class="client-name">Fatih Hacıoğlu</div>
-                        <div class="client-title">Fsm İnşaat Group</div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">"Kuyumuzun debisi düşmüştü, kuyu temizliği için çağırdık. Eski verimine kavuştu diyebilirim. Temiz işçilik için teşekkürler."</p>
-                        <div class="client-name">Ramazan Çataklı</div>
-                        <div class="client-title">Karadeniz K.Yıkama</div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">"Bahçemiz için dalgıç pompa kurulumu yaptırdık. Hem fiyat olarak makuldü hem de çok ilgililer. Satış sonrası destekleri de gayet iyi."</p>
-                        <div class="client-name">Mustafa Yılmaz</div>
-                        <div class="client-title">Villa Sahibi</div>
-                    </div>
-                </div>
-                <button class="prev-btn" onclick="moveSlider(-1)">&#10094;</button>
-                <button class="next-btn" onclick="moveSlider(1)">&#10095;</button>
-            </div>
-            <div class="slider-dots" id="sliderDots"></div>
-        </div>
-    </section>
-
-    <section id="blog" class="blog-section">
-        <div class="container">
-            <h2 class="section-title">Blog Yazılarımız</h2>
-            <p class="section-subtitle">Sektörden haberler ve bilgilendirici makaleler.</p>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Su Sondajı Nedir">
-                    <div class="blog-content">
-                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 15 Ocak 2024</span>
-                        <h3>Su Sondajı Nasıl Yapılır?</h3>
-                        <p>Su sondajı işlemi, doğru zemin etüdü ve profesyonel ekipmanlarla yapılmalıdır. İşte aşama aşama sondaj süreci...</p>
-                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Dalgıç Pompa Seçimi">
-                    <div class="blog-content">
-                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 10 Ocak 2024</span>
-                        <h3>Doğru Dalgıç Pompa Seçimi</h3>
-                        <p>Kuyunuzun derinliğine ve su ihtiyacınıza en uygun dalgıç pompayı seçmek, enerji tasarrufu ve uzun ömür sağlar.</p>
-                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Kuyu Bakımı">
-                    <div class="blog-content">
-                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 05 Ocak 2024</span>
-                        <h3>Kuyu Temizliği Neden Önemli?</h3>
-                        <p>Zamanla azalan su verimini artırmak ve pompanızın ömrünü uzatmak için periyodik kuyu temizliği şarttır.</p>
-                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -223,46 +153,41 @@ sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
 </Layout>
 
 <script>
-document.addEventListener('astro:page-load', () => {
-    // 1. Elementleri Senin Verdiğin İsimlerle Seçiyoruz
-    const slides = document.querySelectorAll('.hero-slider .slide');
-    const prevBtn = document.querySelector('.hero-slider .prev-btn');
-    const nextBtn = document.querySelector('.hero-slider .next-btn');
-    let currentSlide = 0;
-
-    // Slayt Değiştirme Fonksiyonu
-    function showSlide(index) {
-        // Mevcut slayt sayısından fazlaysa başa dön
-        if (index >= slides.length) currentSlide = 0;
-        // 0'dan küçükse sona git
-        else if (index < 0) currentSlide = slides.length - 1;
-        else currentSlide = index;
-
-        // Tüm slaytlardan 'active' sınıfını kaldır
-        slides.forEach(slide => slide.classList.remove('active'));
-        
-        // Sadece şimdikine 'active' ekle
-        slides[currentSlide].classList.add('active');
-    }
-
-    // Butonlara Tıklama Olayları
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            showSlide(currentSlide + 1);
-        });
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            showSlide(currentSlide - 1);
-        });
-    }
-
-    // (Opsiyonel) 5 saniyede bir otomatik dönsün
-    if (slides.length > 1) {
-        setInterval(() => {
-            showSlide(currentSlide + 1);
-        }, 5000);
-    }
-});
+    document.addEventListener('astro:page-load', () => {
+        const slides = document.querySelectorAll('.hero-slider .slide');
+        const prevBtn = document.getElementById('heroPrevBtn');
+        const nextBtn = document.getElementById('heroNextBtn');
+        let currentSlide = 0;
+    
+        function showSlide(index) {
+            // Sınır kontrolü
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+    
+            // Hepsinden active class'ını sil
+            slides.forEach(slide => slide.classList.remove('active'));
+            // Şu anki slayta active ekle
+            slides[currentSlide].classList.add('active');
+        }
+    
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+            });
+        }
+    
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+            });
+        }
+    
+        // 5 Saniyede bir otomatik geçiş
+        if (slides.length > 1) {
+            setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 5000);
+        }
+    });
 </script>
