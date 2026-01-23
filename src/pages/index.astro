@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 const tumHizmetler = await getCollection('hizmetler');
 tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 
-// YENİ: Slider Verisini Çek ve Sırala
+// Slider Verisini Çek ve Sırala
 const sliderVerileri = await getCollection('slider');
 sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
 ---
@@ -87,7 +87,7 @@ sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
                         </div>
                     </div>
                 ))}
-                </div>
+            </div>
         </div>
     </section> 
 
@@ -221,3 +221,48 @@ sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
     </section>
 
 </Layout>
+
+<script>
+document.addEventListener('astro:page-load', () => {
+    // 1. Elementleri Senin Verdiğin İsimlerle Seçiyoruz
+    const slides = document.querySelectorAll('.hero-slider .slide');
+    const prevBtn = document.querySelector('.hero-slider .prev-btn');
+    const nextBtn = document.querySelector('.hero-slider .next-btn');
+    let currentSlide = 0;
+
+    // Slayt Değiştirme Fonksiyonu
+    function showSlide(index) {
+        // Mevcut slayt sayısından fazlaysa başa dön
+        if (index >= slides.length) currentSlide = 0;
+        // 0'dan küçükse sona git
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+
+        // Tüm slaytlardan 'active' sınıfını kaldır
+        slides.forEach(slide => slide.classList.remove('active'));
+        
+        // Sadece şimdikine 'active' ekle
+        slides[currentSlide].classList.add('active');
+    }
+
+    // Butonlara Tıklama Olayları
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+    }
+
+    // (Opsiyonel) 5 saniyede bir otomatik dönsün
+    if (slides.length > 1) {
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+    }
+});
+</script>
