@@ -34,47 +34,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- 3. ANA SAYFA HERO SLIDER ---
-    const heroSlides = document.querySelectorAll('.hero-slider .slide');
-    const heroPrevBtn = document.getElementById('heroPrevBtn');
-    const heroNextBtn = document.getElementById('heroNextBtn');
-    let currentHeroSlide = 0;
-    let heroInterval;
-    
-    function showHeroSlide(index) {
-        heroSlides.forEach(slide => slide.classList.remove('active'));
-        heroSlides[index].classList.add('active');
+    // Slider Fonksiyonları
+function initHeroSlider() {
+    const slides = document.querySelectorAll('.hero-slider .slide');
+    const prevBtn = document.getElementById('heroPrevBtn');
+    const nextBtn = document.getElementById('heroNextBtn');
+    let currentSlide = 0;
+
+    // Eğer slider yoksa fonksiyonu durdur (Hata vermemesi için)
+    if (slides.length === 0) return;
+
+    function showSlide(index) {
+        // Slayt sınırlarını kontrol et
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+
+        // Aktif sınıfını yönet
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide].classList.add('active');
     }
 
-    function nextHeroSlide() {
-        currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
-        showHeroSlide(currentHeroSlide);
+    // Buton Dinleyicileri (Varsa ekle)
+    if (nextBtn) {
+        nextBtn.onclick = function() {
+            showSlide(currentSlide + 1);
+        };
     }
 
-    function prevHeroSlide() {
-        currentHeroSlide = (currentHeroSlide - 1 + heroSlides.length) % heroSlides.length;
-        showHeroSlide(currentHeroSlide);
+    if (prevBtn) {
+        prevBtn.onclick = function() {
+            showSlide(currentSlide - 1);
+        };
     }
 
-    if(heroNextBtn) {
-        heroNextBtn.addEventListener('click', () => {
-            nextHeroSlide();
-            resetHeroInterval();
-        });
+    // Otomatik Geçiş (5 Saniye)
+    // Eğer otomatik dönmesini istemiyorsan alttaki 3 satırı silebilirsin
+    if (slides.length > 1) {
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
     }
-    if(heroPrevBtn) {
-        heroPrevBtn.addEventListener('click', () => {
-            prevHeroSlide();
-            resetHeroInterval();
-        });
-    }
+}
 
-    function resetHeroInterval() {
-        clearInterval(heroInterval);
-        heroInterval = setInterval(nextHeroSlide, 5000);
-    }
-    
-    resetHeroInterval();
+// Astro Sayfa Geçişlerinde Çalışması İçin (View Transitions)
+document.addEventListener('astro:page-load', initHeroSlider);
+
+// Sayfa İlk Yüklendiğinde Çalışması İçin
+document.addEventListener('DOMContentLoaded', initHeroSlider);
 
     // --- 4. YORUMLAR SLIDER ---
     const track = document.getElementById('testimonialSlider');
