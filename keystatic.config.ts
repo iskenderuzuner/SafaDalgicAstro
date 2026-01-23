@@ -3,9 +3,9 @@ import { config, fields, collection, singleton } from '@keystatic/core';
 export default config({
   storage: {
     kind: 'github',
-    repo: 'iskenderuzuner/SafaDalgicAstro', // BURAYI KENDİ BİLGİLERİNLE DEĞİŞTİR!
+    repo: 'iskenderuzuner/SafaDalgicAstro', // Kendi repo adın
   },
-  
+
   // 1. TEKİL AYARLAR (Telefon, Adres vb.)
   singletons: {
     ayarlar: singleton({
@@ -23,7 +23,7 @@ export default config({
     }),
   },
 
-  // 2. KOLEKSİYONLAR (Hizmetler, Sayfalar)
+  // 2. KOLEKSİYONLAR (Hizmetler, Slider vb.)
   collections: {
     hizmetler: collection({
       label: 'Hizmetlerimiz',
@@ -33,14 +33,37 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Hizmet Başlığı' } }),
         description: fields.text({ label: 'Kısa Açıklama (SEO)' }),
-        image: fields.url({ label: 'Kapak Resmi URL' }),
-        order: fields.integer({ label: 'Sıralama No', defaultValue: 0 }),
-        content: fields.document({
+        image: fields.image({
+          label: 'Kapak Resmi',
+          directory: 'public/images/hizmetler',
+          publicPath: '/images/hizmetler/',
+        }),
+        order: fields.integer({
+          label: 'Sıralama No',
+          defaultValue: 0,
+        }),
+        content: fields.markdoc({
           label: 'Hizmet İçeriği',
-          formatting: true,
-          dividers: true,
-          links: true,
-          images: true,
+        }),
+      },
+    }),
+
+    // YENİ EKLENEN SLIDER BÖLÜMÜ (Virgül hatası düzeltildi)
+    slider: collection({
+      label: 'Slider (Manşet)',
+      slugField: 'title',
+      path: 'src/content/slider/*',
+      schema: {
+        title: fields.slug({ name: { label: 'Başlık' } }),
+        aciklama: fields.text({ label: 'Kısa Açıklama' }),
+        resim: fields.image({
+          label: 'Slider Resmi',
+          directory: 'public/images/slider',
+          publicPath: '/images/slider/',
+        }),
+        sira: fields.integer({
+          label: 'Sıralama No (1, 2, 3...)',
+          defaultValue: 1,
         }),
       },
     }),
