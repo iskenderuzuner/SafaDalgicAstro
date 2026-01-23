@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content'; // Bunu eklemeyi unutma
+
+// Hizmetleri Çek
+const tumHizmetler = await getCollection('hizmetler');
+tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Layout title="Anasayfa" description="İstanbul ve çevre illerde su sondajı, kuyu temizliği ve ruhsat hizmetleri. 7/24 Teknik Servis.">
@@ -67,38 +72,23 @@ import Layout from '../layouts/Layout.astro';
         <div class="container">
             <h2 class="section-title">Hizmetlerimiz</h2>
             <p class="section-subtitle">Sondaj, kuyu ve pompa sistemlerinde anahtar teslim çözümler.</p>
+            
             <div class="service-grid">
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&h=300&fit=crop&q=80" alt="Su Sondajı">
-                    <div class="service-content">
-                        <h3>Su Sondajı</h3>
-                        <p>Anahtar teslim su sondajı ve kuyu açımı hizmetleri.</p>
+                {tumHizmetler.map((hizmet) => (
+                    <div class="service-card">
+                        <img src={hizmet.data.image} alt={hizmet.data.title} style="height: 250px; object-fit: cover;">
+                        <div class="service-content">
+                            <h3>{hizmet.data.title}</h3>
+                            <p>{hizmet.data.description}</p>
+                            <a href={`/hizmetler/${hizmet.slug}`} style="color: #004494; font-weight: bold; margin-top: 10px; display: inline-block;">
+                                İncele <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
+                ))}
                 </div>
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=300&fit=crop&q=80" alt="Kuyu Ruhsat">
-                    <div class="service-content">
-                        <h3>Kuyu Ruhsat Hizmeti</h3>
-                        <p>Resmi ruhsat ve izin işlemlerinin takibi.</p>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=600&h=300&fit=crop&q=80" alt="Su Araştırması">
-                    <div class="service-content">
-                        <h3>Su Araştırması</h3>
-                        <p>Sondaj öncesi jeofizik etüt çalışmaları.</p>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img src="https://images.unsplash.com/photo-1565514020176-892ce5779c13?w=600&h=300&fit=crop&q=80" alt="Dalgıç Pompa">
-                    <div class="service-content">
-                        <h3>Dalgıç Pompa</h3>
-                        <p>Pompa seçimi, montajı ve kurulum hizmetleri.</p>
-                    </div>
-                </div>
-            </div>
         </div>
-    </section>
+    </section> 
 
     <section id="referanslar" class="testimonials-section">
         <div class="container">
