@@ -76,6 +76,44 @@ document.addEventListener('DOMContentLoaded', function() {
     
     resetHeroInterval();
 
+     document.addEventListener('astro:page-load', () => {
+        const slides = document.querySelectorAll('.hero-slider .slide');
+        const prevBtn = document.getElementById('heroPrevBtn');
+        const nextBtn = document.getElementById('heroNextBtn');
+        let currentSlide = 0;
+    
+        function showSlide(index) {
+            // Sınır kontrolü
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+    
+            // Hepsinden active class'ını sil
+            slides.forEach(slide => slide.classList.remove('active'));
+            // Şu anki slayta active ekle
+            slides[currentSlide].classList.add('active');
+        }
+    
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+            });
+        }
+    
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+            });
+        }
+    
+        // 5 Saniyede bir otomatik geçiş
+        if (slides.length > 1) {
+            setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 5000);
+        }
+    });
+
     // --- 4. YORUMLAR SLIDER ---
     const track = document.getElementById('testimonialSlider');
     if(track) {

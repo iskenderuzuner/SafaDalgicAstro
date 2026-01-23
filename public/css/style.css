@@ -574,3 +574,44 @@ footer { background: #1a1a1a; color: #bbb; padding: 80px 0 30px; }
         grid-template-columns: 1fr; /* Galeriyi tek sütun yap */
     }
 }
+
+/* =========================================
+   MOBİL CİHAZLAR İÇİN ÖZEL DÜZENLEMELER
+   (Max Genişlik: 768px)
+========================================= */
+@media (max-width: 768px) {
+
+    /* 1. SLIDER OKLARINI GİZLE */
+    .hero-slider .hero-arrow {
+        display: none !important;
+    }
+
+    /* 2. BUTONLARI DÜZENLE (Yan Yana ve Daha Dar) */
+    .hero-cta-buttons {
+        flex-direction: row; /* Butonları yan yana getir */
+        justify-content: center; /* Ortala */
+        gap: 10px; /* Aralarındaki boşluğu azalt */
+        margin-top: 20px;
+    }
+
+    .hero-cta-buttons .btn {
+        width: auto; /* Genişliği içeriğe göre ayarla (Tam genişlik yapma) */
+        min-width: 140px; /* Çok küçülmemeleri için minimum genişlik */
+        padding: 12px 15px; /* Mobilde paddingi biraz azalt */
+        font-size: 14px; /* Yazı boyutunu mobilde biraz küçült */
+    }
+
+    /* (İsteğe Bağlı) Buton ikonlarını mobilde biraz küçült */
+    .hero-cta-buttons .btn i {
+        font-size: 16px;
+        margin-right: 8px;
+    }
+
+    /* Mobil için başlık ve açıklama boyutlarını da optimize edelim */
+     .hero-content h1 {
+        font-size: 32px; /* Mobilde başlığı biraz küçült */
+    }
+    .hero-content p {
+        font-size: 16px; /* Mobilde açıklamayı biraz küçült */
+    }
+}
