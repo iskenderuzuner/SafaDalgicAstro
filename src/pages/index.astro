@@ -150,52 +150,40 @@ sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
         </div>
     </section>
 
-<script>
-    // Sayfa her yüklendiğinde veya değiştiğinde (View Transitions uyumlu) çalıştır
-    document.addEventListener('astro:page-load', () => {
-        
-        console.log("Slider Scripti Başlatılıyor..."); // Kontrol amaçlı log
+</Layout>
 
+<script>
+    document.addEventListener('astro:page-load', () => {
         const slides = document.querySelectorAll('.hero-slider .slide');
         const prevBtn = document.getElementById('heroPrevBtn');
         const nextBtn = document.getElementById('heroNextBtn');
         let currentSlide = 0;
-
-        // Slider yoksa dur
-        if (slides.length === 0) {
-            console.log("Slider elemanları bulunamadı.");
-            return;
-        }
-
-        console.log("Slider bulundu, toplam slayt:", slides.length);
-
+    
         function showSlide(index) {
-            // Aktif slayttan active sınıfını kaldır
-            slides[currentSlide].classList.remove('active');
-
-            // İndeks hesapla
-            currentSlide = (index + slides.length) % slides.length;
-
-            // Yeni slayta active ekle
+            // Sınır kontrolü
+            if (index >= slides.length) currentSlide = 0;
+            else if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+    
+            // Hepsinden active class'ını sil
+            slides.forEach(slide => slide.classList.remove('active'));
+            // Şu anki slayta active ekle
             slides[currentSlide].classList.add('active');
         }
-
-        // Buton Tıklamaları
+    
         if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
-                e.preventDefault(); // Sayfanın zıplamasını engelle
+            nextBtn.addEventListener('click', () => {
                 showSlide(currentSlide + 1);
             });
         }
-
+    
         if (prevBtn) {
-            prevBtn.addEventListener('click', (e) => {
-                e.preventDefault();
+            prevBtn.addEventListener('click', () => {
                 showSlide(currentSlide - 1);
             });
         }
-
-        // Otomatik Geçiş (5 saniye)
+    
+        // 5 Saniyede bir otomatik geçiş
         if (slides.length > 1) {
             setInterval(() => {
                 showSlide(currentSlide + 1);
@@ -203,5 +191,3 @@ sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
         }
     });
 </script>
-
-</Layout>
