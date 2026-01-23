@@ -1,8 +1,0 @@
----
-title: Arteyzen Kuyusu
-description: Arteyzen Kuyusu ile çalışmalar.
-image: >-
-  https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop
-order: 0
----
-gdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgdsgds
