@@ -22,13 +22,6 @@ tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 
 <Layout title={entry.data.title} description={entry.data.description}>
 
-    <section class="page-banner" style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${entry.data.image}');`}>
-        <div class="banner-content">
-            <h1>{entry.data.title}</h1>
-            <p>Profesyonel Çözümler ve Garantili Hizmet</p>
-        </div>
-    </section>
-
     <section class="service-detail-section">
         <div class="container">
             <div class="service-layout">
@@ -56,10 +49,7 @@ tumHizmetler.sort((a, b) => a.data.order - b.data.order);
                 </aside>
 
                 <article class="service-content-area">
-                    <div class="service-main-img">
-                        <img src={entry.data.image} alt={entry.data.title}>
-                    </div>
-
+                <h1 class="hizmet-baslik">{entry.data.title}</h1>
                     <div class="prose-content">
                         <Content />
                     </div>
