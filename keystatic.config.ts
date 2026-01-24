@@ -37,6 +37,7 @@ export default config({
           label: 'Kapak Resmi',
           directory: 'public/images/hizmetler',
           publicPath: '/images/hizmetler/',
+          validation: { isRequired: true },
         }),
         order: fields.integer({
           label: 'Sıralama No',
