@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
-// 1. HİZMETLER (Makale formatında olduğu için type belirtmeye gerek yok, varsayılan 'content')
+// 1. HİZMETLER
 const hizmetler = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -10,21 +10,18 @@ const hizmetler = defineCollection({
   }),
 });
 
-// 2. SLIDER (Sadece veri içerdiği için type: 'data' OLMALI)
+// 2. SLIDER
 const slider = defineCollection({
-  type: 'data', // <--- KRİTİK NOKTA BURASI
+  type: 'data', 
   schema: z.object({
     title: z.string(),
-    aciklama: z.string(),
-    resim: z.string(),
+    aciklama: z.string(), // Senin kodundaki gibi Türkçe bıraktım
+    resim: z.string(),    // Senin kodundaki gibi Türkçe bıraktım
     sira: z.number(),
   }),
 });
 
-
-
-// Blog Şeması
-// src/content/config.ts içinde blog şemasını şöyle güncelle:
+// 3. BLOG (Tarih otomatik)
 const blog = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -34,7 +31,7 @@ const blog = defineCollection({
   }),
 });
 
-// Yorumlar Şeması (Veri tipi olduğu için type: data diyoruz)
+// 4. YORUMLAR
 const yorumlar = defineCollection({
   type: 'data',
   schema: z.object({
@@ -45,11 +42,30 @@ const yorumlar = defineCollection({
   }),
 });
 
+// 5. GENEL AYARLAR (YENİ EKLENDİ: Logo, Favicon, SEO ve İletişim)
+const ayarlar = defineCollection({
+  type: 'data', // JSON dosyası olduğu için data
+  schema: z.object({
+    // Yeni eklediğimiz alanlar
+    logo: z.string(),
+    favicon: z.string(),
+    siteTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    
+    // Mevcut iletişim bilgileri
+    slogan: z.string(),
+    telefon: z.string(),
+    email: z.string(),
+    adres: z.string(),
+    whatsappLink: z.string().optional(),
+  }),
+});
 
-
+// HEPSİNİ DIŞARI AKTAR
 export const collections = {
   hizmetler: hizmetler,
   slider: slider,
   blog: blog,       
-  yorumlar: yorumlar 
+  yorumlar: yorumlar,
+  ayarlar: ayarlar // <-- Bunu ekledik, artık hata vermez.
 };

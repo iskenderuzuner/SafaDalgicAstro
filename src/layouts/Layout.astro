@@ -1,31 +1,65 @@
 ---
+---
 import { getEntry, getCollection } from 'astro:content'; 
 
-const { title, description } = Astro.props;
+// Props: Sayfadan gelen özel başlık ve açıklama
+const { 
+    title, 
+    description,
+    image, // Blog yazısı resmi varsa
+    articleDate, // Blog tarihi varsa
+    type = "website" // website veya article
+} = Astro.props;
 
 // Ayarları Çek
 const genelAyarlar = await getEntry('ayarlar', 'genel');
 const veri = genelAyarlar ? genelAyarlar.data : {
+    // Veri yoksa varsayılanlar (Hata vermemesi için)
     telefon: "0532 540 68 29",
     email: "info@safadalgicpompa.com",
     adres: "Adres Belirtilmedi",
     slogan: "Safa Dalgıç Pompa",
-    whatsappLink: "#"
+    logo: "/images/genel/logo.png", // Varsayılan logo yolu
+    favicon: "/favicon.svg",
+    seoDescription: "Sondaj ve Dalgıç Pompa Hizmetleri"
 };
 
-// Hizmetleri Çek ve Sırala
+// Hizmetleri Çek (Menü için)
 const tumHizmetler = await getCollection('hizmetler');
 tumHizmetler.sort((a, b) => a.data.order - b.data.order);
+
+// --- SEO MANTIĞI ---
+// 1. Başlık: "Hizmetler | Safa Pompa" formatı
+const sayfaBasligi = title ? `${title} | ${veri.siteBaslik || 'Safa Dalgıç Pompa'}` : (veri.siteBaslik || 'Safa Dalgıç Pompa');
+
+// 2. Açıklama: Sayfaya özel yoksa genel ayarı kullan
+const sayfaAciklamasi = description || veri.seoDescription;
+
+// 3. Otomatik URL ve Canonical
+const siteUrl = Astro.site ? Astro.site.href : "https://iskenderuzuner.web.tr";
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const shareImage = image || new URL(veri.logo, siteUrl).href;
 ---
 
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
+   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} | Safa Dalgıç Pompa</title>
-    <meta name="description" content={description}>
+    <link rel="icon" href={veri.favicon} />
+    <title>{sayfaBasligi}</title>
+    <meta name="description" content={sayfaAciklamasi}>
+    <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={sayfaBasligi} />
+    <meta property="og:description" content={sayfaAciklamasi} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={shareImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={sayfaBasligi} />
+    <meta name="twitter:description" content={sayfaAciklamasi} />
+    <meta name="twitter:image" content={shareImage} />
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -48,7 +82,7 @@ tumHizmetler.sort((a, b) => a.data.order - b.data.order);
         <div class="container">
             <div class="logo">
                 <a href="/">
-                    <img src="https://safadalgicpompa.com/wp-content/uploads/2023/01/safa-logo-uzun.png" alt="Safa Dalgıç Pompa">
+                    <img src={veri.logo} alt={veri.siteBaslik}>
                 </a>
             </div>
             
@@ -56,7 +90,7 @@ tumHizmetler.sort((a, b) => a.data.order - b.data.order);
                 <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
                 <ul id="menuList">
                     <li class="mobile-menu-header">
-                        <img src="https://safadalgicpompa.com/wp-content/uploads/2023/01/safa-logo-uzun.png" alt="Safa Logo Mobil">
+                        <img src={veri.logo} alt={veri.siteBaslik}>
                         <i class="fas fa-times" id="menuClose"></i>
                     </li>
                     <li><a href="/">Anasayfa</a></li>
@@ -91,7 +125,7 @@ tumHizmetler.sort((a, b) => a.data.order - b.data.order);
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>Hakkımızda</h3>
-                    <img src="https://safadalgicpompa.com/wp-content/uploads/2023/01/safa-logo-uzun.png" alt="Safa Logo" class="footer-logo" style="background:white; padding:5px; border-radius:4px;">
+                    <img src={veri.logo} alt={veri.siteBaslik} class="footer-logo" style="background:white; padding:5px; border-radius:4px;">
                     <p>"Firmamız Marmara bölgesi genelinde sondaj, sondaj etüdü, dalgıç pompa satış ve servis hizmetleri vermekteyiz."</p>
                 </div>
                 <div class="footer-col">

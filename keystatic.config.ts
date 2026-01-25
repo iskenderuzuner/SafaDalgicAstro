@@ -19,6 +19,26 @@ export default config({
         email: fields.text({ label: 'E-Posta Adresi' }),
         adres: fields.text({ label: 'Açık Adres', multiline: true }),
         whatsappLink: fields.url({ label: 'WhatsApp Linki' }),
+      
+        logo: fields.image({
+          label: 'Site Logosu',
+          directory: 'public/images/genel',
+          publicPath: '/images/genel/',
+          validation: { isRequired: true }
+        }),
+
+        favicon: fields.image({
+          label: 'Favicon (Tarayıcı İkonu)',
+          directory: 'public/images/genel',
+          publicPath: '/images/genel/',
+          validation: { isRequired: true }
+        }),
+
+        seoDescription: fields.text({
+          label: 'SEO Genel Açıklama (Description)',
+          multiline: true,
+          description: 'Google aramalarında çıkacak site özeti.'
+        }),
       },
     }),
   },
