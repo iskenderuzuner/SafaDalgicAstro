@@ -8,7 +8,11 @@ const { Content } = await sayfaVerisi.render();
 const veri = sayfaVerisi.data;
 ---
 
-<Layout title={veri.title} description={veri.description}>
+<Layout 
+    title="Hakkımızda" 
+    description="Safa Dalgıç Pompa kimdir? 20 yıllık tecrübemiz ve uzman kadromuz hakkında bilgiler."
+    type="website"
+>
     
     <section class="page-banner" style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${veri.bannerImage}');`}>
         <div class="banner-content">

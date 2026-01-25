@@ -7,7 +7,10 @@ const tumBloglar = await getCollection('blog');
 tumBloglar.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 ---
 
-<Layout title="Blog & Haberler" description="Sektörden güncel haberler ve teknik bilgiler.">
+<Layout 
+    title="Blog & Haberler" 
+    description="Sektörden en güncel sondaj teknikleri, kuyu bakımı ve ruhsat süreçleri hakkında bilgiler."
+    type="website">
   
   <section class="page-header">
     <div class="container">

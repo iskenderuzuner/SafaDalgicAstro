@@ -30,7 +30,11 @@ const metinKisalt = (metin, limit = 50) => {
 };
 ---
 
-<Layout title={entry.data.title} description={entry.data.description}>
+<Layout 
+    title={entry.data.title} 
+    description={entry.data.description} 
+    image={entry.data.image}      
+    type="article"                articleDate={entry.data.date} >
   
   <div class="blog-detail-wrapper">
     <div class="container">

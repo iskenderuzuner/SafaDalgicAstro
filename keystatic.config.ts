@@ -7,26 +7,19 @@ export default config({
   },
 
   // 1. TEKİL AYARLAR (Telefon, Adres vb.)
-  singletons: {
+singletons: {
     ayarlar: singleton({
-      label: 'Genel Ayarlar',
+      label: 'Genel Site Ayarları',
       path: 'src/content/ayarlar/genel',
       format: 'json',
       schema: {
-        siteBaslik: fields.text({ label: 'Site Başlığı' }),
-        slogan: fields.text({ label: 'Üst Bar Slogan' }),
-        telefon: fields.text({ label: 'Telefon Numarası' }),
-        email: fields.text({ label: 'E-Posta Adresi' }),
-        adres: fields.text({ label: 'Açık Adres', multiline: true }),
-        whatsappLink: fields.url({ label: 'WhatsApp Linki' }),
-      
+        // 1. Logo ve İkonlar
         logo: fields.image({
           label: 'Site Logosu',
           directory: 'public/images/genel',
           publicPath: '/images/genel/',
           validation: { isRequired: true }
         }),
-
         favicon: fields.image({
           label: 'Favicon (Tarayıcı İkonu)',
           directory: 'public/images/genel',
@@ -34,11 +27,19 @@ export default config({
           validation: { isRequired: true }
         }),
 
-        seoDescription: fields.text({
-          label: 'SEO Genel Açıklama (Description)',
-          multiline: true,
-          description: 'Google aramalarında çıkacak site özeti.'
+        // 2. SEO ve Başlıklar (HATAYI ÇÖZEN KISIM BURASI: siteTitle eklendi)
+        siteTitle: fields.text({ label: 'Site Başlığı (Örn: Safa Dalgıç Pompa)' }),
+        seoDescription: fields.text({ 
+            label: 'SEO Açıklaması (Google Özeti)', 
+            multiline: true 
         }),
+        slogan: fields.text({ label: 'Üst Bar Slogan (Örn: 7/24 Hizmet)' }),
+
+        // 3. İletişim Bilgileri
+        telefon: fields.text({ label: 'Telefon Numarası' }),
+        email: fields.text({ label: 'E-Posta Adresi' }),
+        adres: fields.text({ label: 'Açık Adres', multiline: true }),
+        whatsappLink: fields.url({ label: 'WhatsApp Linki (https://wa.me/...)' }),
       },
     }),
   },

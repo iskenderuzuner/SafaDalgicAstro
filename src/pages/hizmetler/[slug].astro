@@ -20,7 +20,11 @@ const tumHizmetler = await getCollection('hizmetler');
 tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout title={entry.data.title} description={entry.data.description}>
+<Layout 
+    title={entry.data.title} 
+    description={entry.data.description} 
+    image={entry.data.image}
+    type="website" >
 
     <section class="service-detail-section">
         <div class="container">
