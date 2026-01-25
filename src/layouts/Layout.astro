@@ -51,6 +51,9 @@ const shareImage = image || new URL(veri.logo, siteUrl).href;
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="noindex, nofollow" />
     <meta property="og:type" content={type} />
+    {articleDate && (
+        <meta property="article:published_time" content={new Date(articleDate).toISOString()} />
+    )}
     <meta property="og:title" content={sayfaBasligi} />
     <meta property="og:description" content={sayfaAciklamasi} />
     <meta property="og:url" content={canonicalURL} />
