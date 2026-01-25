@@ -68,5 +68,55 @@ export default config({
         }),
       },
     }),
+    
+    // 3. BLOG
+    blog: collection({
+      label: 'Blog Yazıları',
+      slugField: 'title',
+      path: 'src/content/blog/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Blog Başlığı' } }),
+        description: fields.text({ label: 'Kısa Özet' }),
+        date: fields.date({ label: 'Yayın Tarihi', validation: { isRequired: true } }),
+        image: fields.image({
+          label: 'Kapak Resmi',
+          directory: 'public/images/blog',
+          publicPath: '/images/blog/',
+          validation: { isRequired: true },
+        }),
+        content: fields.document({
+            label: 'Yazı İçeriği',
+            formatting: true,
+            dividers: true,
+            links: true,
+            images: {
+              directory: 'public/images/blog/icerik',
+              publicPath: '/images/blog/icerik/',
+            },
+        }),
+      },
+    }),
+
+    // 4. MÜŞTERİ YORUMLARI
+    yorumlar: collection({
+      label: 'Müşteri Yorumları',
+      slugField: 'isim',
+      path: 'src/content/yorumlar/*',
+      format: 'json',
+      schema: {
+        isim: fields.slug({ name: { label: 'Müşteri Adı Soyadı' } }),
+        unvan: fields.text({ label: 'Ünvan / Firma Adı' }),
+        yorum: fields.text({ label: 'Müşteri Yorumu', multiline: true }),
+        puan: fields.integer({ 
+            label: 'Puan (1-5 Arası)', 
+            defaultValue: 5,
+            validation: { min: 1, max: 5 } 
+        }),
+      },
+    }),
+
+    
+
   },
 });

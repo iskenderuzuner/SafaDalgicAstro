@@ -21,7 +21,34 @@ const slider = defineCollection({
   }),
 });
 
+
+
+// Blog Şeması
+const blog = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    date: z.string().or(z.date()),
+    image: z.string(),
+  }),
+});
+
+// Yorumlar Şeması (Veri tipi olduğu için type: data diyoruz)
+const yorumlar = defineCollection({
+  type: 'data',
+  schema: z.object({
+    isim: z.string(),
+    unvan: z.string().optional(),
+    yorum: z.string(),
+    puan: z.number().min(1).max(5).default(5),
+  }),
+});
+
+
+
 export const collections = {
   hizmetler: hizmetler,
   slider: slider,
+  blog: blog,       
+  yorumlar: yorumlar 
 };

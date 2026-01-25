@@ -9,6 +9,23 @@ tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 // 2. Slider Verisini Çek ve Sırala
 const sliderVerileri = await getCollection('slider');
 sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
+
+// Yorumları Çek
+let yorumlar = [];
+try {
+  yorumlar = await getCollection('yorumlar');
+} catch (e) { console.log("Yorum yok"); }
+
+// Blogları Çek ve Tarihe Göre Sırala
+let blogYazilari = [];
+try {
+  blogYazilari = await getCollection('blog');
+  blogYazilari.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+} catch (e) { console.log("Blog yok"); }
+
+// Anasayfa için sadece son 3 tanesini al
+const sonYorumlar = yorumlar.slice(0, 3);
+const sonBloglar = blogYazilari.slice(0, 3);
 ---
 
 <Layout title="Anasayfa" description="İstanbul ve çevre illerde su sondajı, kuyu temizliği ve ruhsat hizmetleri. 7/24 Teknik Servis.">
@@ -91,71 +108,56 @@ sliderVerileri.sort((a, b) => a.data.sira - b.data.sira);
     </section>
 
 
-    <section id="referanslar" class="testimonials-section">
+    <section id="referanslar" class="testimonials-section" style="background-color: #f8f9fa; padding: 60px 0;">
         <div class="container">
             <h2 class="section-title">Müşteri Yorumları</h2>
-            <p class="section-subtitle">Siz değerli müşterilerimizin güveni, bizim en büyük referansımızdır.</p>
-            
-            <div class="slider-container">
-                <div class="testimonial-slider" id="testimonialSlider" style="transform: translateX(0%);">
-                    <div class="testimonial-item">
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">"100 metre derinlikte sondaj işimiz vardı. Fatih Bey ve ekibi çok profesyonelce çalıştı. Makine parkurları çok güçlü, işi zamanında teslim ettiler."</p>
-                        <div class="client-name">Fatih Hacıoğlu</div>
-                        <div class="client-title">Fsm İnşaat Group</div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">"Kuyumuzun debisi düşmüştü, kuyu temizliği için çağırdık. Eski verimine kavuştu diyebilirim. Temiz işçilik için teşekkürler."</p>
-                        <div class="client-name">Ramazan Çataklı</div>
-                        <div class="client-title">Karadeniz K.Yıkama</div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">"Bahçemiz için dalgıç pompa kurulumu yaptırdık. Hem fiyat olarak makuldü hem de çok ilgililer. Satış sonrası destekleri de gayet iyi."</p>
-                        <div class="client-name">Mustafa Yılmaz</div>
-                        <div class="client-title">Villa Sahibi</div>
-                    </div>
-                </div>
-                <button class="prev-btn" onclick="moveSlider(-1)">❮</button>
-                <button class="next-btn" onclick="moveSlider(1)">❯</button>
+            <p class="section-subtitle">Bizi tercih eden müşterilerimizin düşünceleri.</p>
+
+            <div class="testimonial-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+                {sonYorumlar.length > 0 ? (
+                    sonYorumlar.map((yorum) => (
+                        <div class="testimonial-card" style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                            <div class="stars" style="color: #f39c12; margin-bottom: 15px;">
+                                {Array.from({ length: yorum.data.puan }).map(() => (
+                                    <i class="fas fa-star"></i>
+                                ))}
+                            </div>
+                            <p style="font-style: italic; color: #555;">"{yorum.data.yorum}"</p>
+                            <h4 style="color: #004494; margin-top: 15px;">{yorum.data.isim}</h4>
+                            <span style="color: #888; font-size: 0.9em;">{yorum.data.unvan || 'Müşteri'}</span>
+                        </div>
+                    ))
+                ) : (
+                    <p style="text-align: center; width: 100%; color: #888;">Henüz yorum eklenmemiş.</p>
+                )}
             </div>
-            <div class="slider-dots" id="sliderDots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
         </div>
     </section>
 
-    <section id="blog" class="blog-section">
+    <section id="blog" class="blog-section" style="padding: 60px 0;">
         <div class="container">
-            <h2 class="section-title">Blog Yazılarımız</h2>
-            <p class="section-subtitle">Sektörden haberler ve bilgilendirici makaleler.</p>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Su Sondajı Nedir">
-                    <div class="blog-content">
-                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 15 Ocak 2024</span>
-                        <h3>Su Sondajı Nasıl Yapılır?</h3>
-                        <p>Su sondajı işlemi, doğru zemin etüdü ve profesyonel ekipmanlarla yapılmalıdır. İşte aşama aşama sondaj süreci...</p>
-                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Dalgıç Pompa Seçimi">
-                    <div class="blog-content">
-                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 10 Ocak 2024</span>
-                        <h3>Doğru Dalgıç Pompa Seçimi</h3>
-                        <p>Kuyunuzun derinliğine ve su ihtiyacınıza en uygun dalgıç pompayı seçmek, enerji tasarrufu ve uzun ömür sağlar.</p>
-                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <img src="https://www.uzaysondaj.com/templates/yootheme/cache/2a/yeralti-su-nasil-bulunur-2a19f6e5.webp" alt="Kuyu Bakımı">
-                    <div class="blog-content">
-                        <span class="blog-date"><i class="far fa-calendar-alt"></i> 05 Ocak 2024</span>
-                        <h3>Kuyu Temizliği Neden Önemli?</h3>
-                        <p>Zamanla azalan su verimini artırmak ve pompanızın ömrünü uzatmak için periyodik kuyu temizliği şarttır.</p>
-                        <a href="#" class="read-more">Devamını Oku <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            <h2 class="section-title">Blog & Duyurular</h2>
+            <p class="section-subtitle">Sektörden güncel bilgiler.</p>
+
+            <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+                {sonBloglar.length > 0 ? (
+                    sonBloglar.map((yazi) => (
+                        <article class="blog-card" style="border: 1px solid #eee; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <img src={yazi.data.image} alt={yazi.data.title} style="width: 100%; height: 200px; object-fit: cover;">
+                            <div class="blog-content" style="padding: 20px;">
+                                <span style="font-size: 0.85em; color: #888;">
+                                    {new Date(yazi.data.date).toLocaleDateString('tr-TR')}
+                                </span>
+                                <h3 style="margin: 10px 0; font-size: 1.2em;">{yazi.data.title}</h3>
+                                <a href={`/blog/${yazi.slug}`} style="color: #004494; font-weight: bold; text-decoration: none;">
+                                    Devamını Oku <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    ))
+                ) : (
+                    <p style="text-align: center; width: 100%; color: #888;">Henüz blog yazısı eklenmemiş.</p>
+                )}
             </div>
         </div>
     </section>
