@@ -37,7 +37,46 @@ const sayfaAciklamasi = description || veri.seoDescription;
 // 3. Otomatik URL ve Canonical
 const siteUrl = Astro.site ? Astro.site.href : "https://iskenderuzuner.web.tr";
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
-const shareImage = image || new URL(veri.logo, siteUrl).href;
+
+// 1. RESİM LİNKİ DÜZELTMESİ (Relative URL Sorunu Çözüldü)
+// Eğer resim "/images" ile başlıyorsa, başına site adresini (https://...) ekler.
+const hamResim = image || veri.logo;
+const shareImage = hamResim.startsWith('http') 
+    ? hamResim 
+    : new URL(hamResim, siteUrl).href;
+
+// 2. SCHEMA.ORG (Google İşletme Kimliği - GÜNCELLENDİ)
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": veri.siteBaslik || "Safa Dalgıç Pompa",
+  "image": shareImage,
+  "description": veri.seoDescription,
+  "telephone": veri.telefon,
+  "email": veri.email,
+  "url": siteUrl,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": veri.adres,
+    "addressLocality": "İstanbul",
+    "addressCountry": "TR",
+    "postalCode": "34912" // Pendik Yenişehir Posta Kodu
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "40.9281093",  // TAM NOKTA ATIŞI KONUMUN
+    "longitude": "29.3093346" // TAM NOKTA ATIŞI KONUMUN
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "priceRange": "₺₺"
+};
 ---
 
 <!DOCTYPE html>
@@ -65,6 +104,7 @@ const shareImage = image || new URL(veri.logo, siteUrl).href;
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 </head>
 <body>
 
