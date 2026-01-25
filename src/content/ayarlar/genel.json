@@ -1,8 +1,11 @@
 {
-  "siteBaslik": "Safa Dalgıç Pompa",
+  "siteTitle": "Safa Dalgıç Pompa",
   "slogan": "İstanbul ve Çevre İllerinde 7/24 Kesintisiz Hizmett",
   "telefon": "0532 540 68 29",
   "email": "info@safadalgicpompa.com",
   "adres": "Yenişehir Mh. Osmanlı Bulvarı Ayport Residence No: 2/A Pendik / İstanbul",
-  "whatsappLink": "https://wa.me/905325406829"
+  "whatsappLink": "https://wa.me/905325406829",
+  "logo": "/images/genel/logo.png",
+  "favicon": "/favicon.svg",
+  "seoDescription": "İstanbul su sondajı, dalgıç pompa servisi ve kuyu temizliği hizmetleri. Profesyonel ekipman ve garantili hizmet."
 }
