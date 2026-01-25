@@ -1,5 +1,5 @@
 ---
-import { getEntry, getCollection } from 'astro:content'; // getCollection ekledik
+import { getEntry, getCollection } from 'astro:content'; 
 
 const { title, description } = Astro.props;
 
@@ -13,7 +13,7 @@ const veri = genelAyarlar ? genelAyarlar.data : {
     whatsappLink: "#"
 };
 
-// YENİ: Hizmetleri Çek ve Sırala
+// Hizmetleri Çek ve Sırala
 const tumHizmetler = await getCollection('hizmetler');
 tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 ---
@@ -61,16 +61,19 @@ tumHizmetler.sort((a, b) => a.data.order - b.data.order);
                     </li>
                     <li><a href="/">Anasayfa</a></li>
                     <li><a href="/hakkimizda">Hakkımızda</a></li>
-                        <li class="dropdown">
-                            <a href="/#hizmetler" class="dropbtn">Hizmetlerimiz <i class="fas fa-chevron-down"></i></a>
-                            <ul class="dropdown-content">
-                                {tumHizmetler.map((hizmet) => (
-                                    <li>
-                                        <a href={`/hizmetler/${hizmet.slug}`}>{hizmet.data.title}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </li>
+                    
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn" id="servicesLink">
+                            Hizmetlerimiz <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-content">
+                            {tumHizmetler.map((hizmet) => (
+                                <li>
+                                    <a href={`/hizmetler/${hizmet.slug}`}>{hizmet.data.title}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </li>
                     <li><a href="/#referanslar">Referanslar</a></li>
                     <li><a href="/#blog">Blog</a></li>
                     <li><a href="/iletisim">İletişim</a></li>
