@@ -78,7 +78,7 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Blog Başlığı' } }),
         description: fields.text({ label: 'Kısa Özet' }),
-        date: fields.date({ label: 'Yayın Tarihi', validation: { isRequired: true } }),
+        date: fields.date({ label: 'Yayın Tarihi' }),
         image: fields.image({
           label: 'Kapak Resmi',
           directory: 'public/images/blog',

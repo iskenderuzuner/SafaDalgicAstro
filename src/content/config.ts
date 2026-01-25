@@ -24,11 +24,12 @@ const slider = defineCollection({
 
 
 // Blog Şeması
+// src/content/config.ts içinde blog şemasını şöyle güncelle:
 const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    date: z.string().or(z.date()),
+    date: z.date().default(() => new Date()), 
     image: z.string(),
   }),
 });
