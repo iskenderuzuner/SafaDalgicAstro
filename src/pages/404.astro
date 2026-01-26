@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - Sayfa Bulunamadı" description="Aradığınız sayfaya ulaşılamadı.">
+  
+  <div class="error-page-container">
+    <div class="content-box">
+      
+      <div class="image-wrapper">
+        <img src="/images/404-hata.jpg" alt="Sayfa Bulunamadı" />
+      </div>
+
+      <h1>404</h1>
+      <h2>Eyvah! Bu Kuyudan Su Çıkmadı...</h2>
+      
+      <p>
+        Aradığınız sayfa kurumuş, yeri değişmiş veya hiç açılmamış olabilir. 
+        Endişelenmeyin, ustalarımız durumu kontrol ediyor.
+      </p>
+
+      <div class="button-group">
+        <a href="/" class="btn-home">
+          💧 Ana Sayfaya Dön
+        </a>
+        <a href="/iletisim" class="btn-contact">
+          📞 Bize Ulaşın
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</Layout>
+
+<style>
+  /* Sayfa Düzeni */
+  .error-page-container {
+    min-height: 80vh; /* Ekranı kaplasın */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9fafb;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .content-box {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    max-width: 600px;
+    width: 100%;
+    border-bottom: 6px solid #ff6600; /* Altına turuncu çizgi */
+  }
+
+  /* Görsel Ayarları */
+  .image-wrapper img {
+    width: 250px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%; /* Yuvarlak olsun */
+    border: 5px solid #e5e7eb;
+  }
+
+  /* Yazı Stilleri */
+  h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    color: #003366; /* Lacivert */
+    margin: 0;
+    line-height: 1;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff6600; /* Turuncu */
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  /* Butonlar */
+  .button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-home {
+    background-color: #003366;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .btn-home:hover {
+    background-color: #002244;
+    transform: translateY(-3px);
+  }
+
+  .btn-contact {
+    background-color: white;
+    color: #003366;
+    border: 2px solid #003366;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .btn-contact:hover {
+    background-color: #f0f7ff;
+    transform: translateY(-3px);
+  }
+
+  /* Mobil Uyum */
+  @media (max-width: 600px) {
+    h1 { font-size: 4rem; }
+    h2 { font-size: 1.5rem; }
+    .content-box { padding: 30px 20px; }
+  }
+</style>
