@@ -14,103 +14,27 @@ const veri = sayfaVerisi.data;
     type="website"
 >
     
-<div class="bg-gray-100 py-12">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold text-center text-blue-900">Suyun Olduğu Her Yerde Biz Varız</h1>
-      <p class="text-center text-gray-600 mt-4 max-w-2xl mx-auto">Tecrübe, Mühendislik ve Teknolojinin Buluştuğu Nokta</p>
-    </div>
-  </div>
-
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      
-      <div class="flex flex-col lg:flex-row items-center gap-12">
-        
-        <div class="lg:w-1/2 relative">
-          <div class="absolute top-4 left-4 bg-orange-500 text-white py-2 px-6 rounded-full font-bold shadow-lg z-10">
-            20+ Yıllık Tecrübe
-          </div>
-          <img 
-            src="/images/hakkimizda-ekip.jpg" 
-            alt="Safa Dalgıç Pompa Ekibi" 
-            class="rounded-xl shadow-2xl w-full h-auto object-cover border-4 border-white"
-          />
-          <div class="absolute -bottom-6 -right-6 w-full h-full bg-blue-100 rounded-xl -z-10 hidden lg:block"></div>
+    <section class="page-banner" style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${veri.bannerImage}');`}>
+        <div class="banner-content">
+            <h1>{veri.title}</h1>
+            <p>2002'den Günümüze Güven ve Tecrübe</p>
         </div>
+    </section>
 
-        <div class="lg:w-1/2">
-          <h2 class="text-3xl font-bold text-blue-900 mb-6">Biz Kimiz?</h2>
-          
-          <div class="space-y-4 text-gray-700 leading-relaxed text-lg">
-            <p>
-              **Safa Dalgıç Pompa ve Sondaj**, 2002 yılında İstanbul'da, yeraltı kaynaklarını en verimli şekilde yeryüzüne çıkarmak ve yönetmek amacıyla kurulmuştur. Sektöre küçük bir sondaj makinesiyle başlayan serüvenimiz, bugün geniş makine parkuru, uzman mühendis kadrosu ve yüzlerce başarılı referans ile devam etmektedir.
-            </p>
-            <p>
-              Sadece "kuyu açıp giden" bir firma değiliz. Biz, suyun jeofizik etüdünden başlayarak; sondajı, borulaması, pompa seçimi ve DSİ ruhsatlandırma süreçlerine kadar **anahtar teslim proje** üreten bir mühendislik firmasıyız.
-            </p>
-            <p>
-              İstanbul başta olmak üzere Kocaeli, Sakarya ve Tekirdağ bölgelerinde; sanayi tesislerinden tarım arazilerine, villa bahçelerinden toplu konut projelerine kadar suyun ihtiyaç duyulduğu her noktada çözüm ortağınızız.
-            </p>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-6 mt-10">
-            <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
-              <h3 class="text-xl font-bold text-blue-900 mb-2">Misyonumuz</h3>
-              <p class="text-sm text-gray-700">
-                Müşterilerimize en doğru teknikle, sürdürülebilir ve kesintisiz su kaynağı sağlamak. Teknolojik gelişmeleri takip ederek, sondaj maliyetlerini düşürürken kuyu ömrünü ve su kalitesini maksimum seviyeye çıkarmak.
-              </p>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="about-intro-grid">
+                <div class="about-large-img">
+                    <div class="experience-badge">20+ Yıllık Tecrübe</div>
+                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=800&auto=format&fit=crop" alt="Hakkımızda">
+                </div>
+                
+                <div class="about-text-content text-block prose-content">
+                    <Content />
+                </div>
             </div>
-            <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500">
-              <h3 class="text-xl font-bold text-orange-900 mb-2">Vizyonumuz</h3>
-              <p class="text-sm text-gray-700">
-                Marmara Bölgesi'nin en güvenilir ve donanımlı sondaj firması olmak. "Safa Dalgıç Pompa yaptıysa sağlamdır" algısını koruyarak, sektörde kalite ve güvenliğin standartlarını belirlemek.
-              </p>
-            </div>
-          </div>
-
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Neden Bizi Tercih Etmelisiniz?</h2>
-      
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-          <div class="text-4xl text-blue-600 mb-4">
-            <i class="fas fa-tools"></i> </div>
-          <h3 class="text-xl font-bold mb-3">Güçlü Makine Parkuru</h3>
-          <p class="text-gray-600">
-            Hem yumuşak zeminler için Rotary (Çamurlu), hem de sert kayalar için Havalı (Kompresörlü) sondaj makinelerimizle her türlü arazide çalışabiliyoruz.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-          <div class="text-4xl text-blue-600 mb-4">
-            <i class="fas fa-hard-hat"></i>
-          </div>
-          <h3 class="text-xl font-bold mb-3">Mühendislik Yaklaşımı</h3>
-          <p class="text-gray-600">
-            Ezbere iş yapmıyoruz. Jeofizik mühendislerimizle zemin etüdü yapıyor, "su çıkmaz" dediğimiz yerde sizi boşuna masrafa sokmuyoruz.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-          <div class="text-4xl text-blue-600 mb-4">
-            <i class="fas fa-file-contract"></i>
-          </div>
-          <h3 class="text-xl font-bold mb-3">Resmi & Ruhsatlı İşlem</h3>
-          <p class="text-gray-600">
-            Kaçak kuyu riskine girmenize gerek yok. DSİ Arama ve Kullanma ruhsat süreçlerinizi uzman ekibimizle A'dan Z'ye takip ediyoruz.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
+    </section>
 
 </Layout>
 
