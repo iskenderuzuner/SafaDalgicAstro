@@ -4,9 +4,9 @@ import { defineCollection, z } from 'astro:content';
 const hizmetler = defineCollection({
   schema: z.object({
     title: z.string(),
-    description: z.string().optional(),
-    image: z.string().optional(),
-    order: z.number().optional(),
+    description: z.string(),
+    image: z.string(),
+    order: z.number().optional().default(0),
   }),
 });
 
@@ -27,7 +27,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     date: z.date().default(() => new Date()), 
-    image: z.string().optional(),
+    image: z.string(),
   }),
 });
 
