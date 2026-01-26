@@ -1,46 +1,263 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getEntry } from 'astro:content';
 
-// İçeriği 'sayfalar' koleksiyonundan 'hakkimizda' ID'si ile çek
-const sayfaVerisi = await getEntry('sayfalar', 'hakkimizda');
-const { Content } = await sayfaVerisi.render();
-const veri = sayfaVerisi.data;
+const pageTitle = "Hakkımızda - Safa Dalgıç Pompa ve Sondaj";
+const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, dalgıç pompa ve zemin etüdü hizmetleri sunan çözüm ortağınız.";
 ---
 
-<Layout 
-    title="Hakkımızda" 
-    description="Safa Dalgıç Pompa kimdir? 20 yıllık tecrübemiz ve uzman kadromuz hakkında bilgiler."
-    type="website"
->
+<Layout title={pageTitle} description={pageDescription}>
+  
+  <div class="page-header">
+    <div class="container">
+      <h1>Suyun Derinliklerinde Uzmanlık</h1>
+      <p>Tecrübe, Mühendislik ve Teknolojinin Buluştuğu Nokta</p>
+    </div>
+  </div>
+
+  <div class="main-content container">
     
-    <section class="page-banner" style={`background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${veri.bannerImage}');`}>
-        <div class="banner-content">
-            <h1>{veri.title}</h1>
-            <p>2002'den Günümüze Güven ve Tecrübe</p>
-        </div>
-    </section>
+    <div class="about-section">
+      <div class="about-image-wrapper">
+        <div class="experience-badge">20+ Yıllık Tecrübe</div>
+        <img src="/images/hakkimizda-ekip.jpg" alt="Safa Sondaj Ekibi" class="about-image" />
+      </div>
 
-    <section class="page-content-section">
-        <div class="container">
-            <div class="about-intro-grid">
-                <div class="about-large-img">
-                    <div class="experience-badge">20+ Yıllık Tecrübe</div>
-                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=800&auto=format&fit=crop" alt="Hakkımızda">
-                </div>
-                
-                <div class="about-text-content text-block prose-content">
-                    <Content />
-                </div>
-            </div>
+      <div class="about-text">
+        <h2 class="section-title">Biz Kimiz?</h2>
+        <p>
+          **Safa Dalgıç Pompa ve Sondaj**, 2002 yılında İstanbul'da, yeraltı kaynaklarını en verimli şekilde yeryüzüne çıkarmak ve yönetmek amacıyla kurulmuştur. Sektöre küçük bir sondaj makinesiyle başlayan serüvenimiz, bugün geniş makine parkuru, uzman mühendis kadrosu ve yüzlerce başarılı referans ile devam etmektedir.
+        </p>
+        <p>
+          Sadece "kuyu açıp giden" bir firma değiliz. Biz, suyun jeofizik etüdünden başlayarak; sondajı, borulaması, pompa seçimi ve DSİ ruhsatlandırma süreçlerine kadar **anahtar teslim proje** üreten bir mühendislik firmasıyız.
+        </p>
+        
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="check-icon">✓</span> Garantili Sondaj
+          </div>
+          <div class="feature-item">
+            <span class="check-icon">✓</span> DSİ Ruhsat Takibi
+          </div>
+          <div class="feature-item">
+            <span class="check-icon">✓</span> 7/24 Teknik Servis
+          </div>
+          <div class="feature-item">
+            <span class="check-icon">✓</span> Ücretsiz Keşif
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
 
+    <div class="mv-section">
+      <div class="mv-card mission">
+        <h3>Misyonumuz</h3>
+        <p>Müşterilerimize en doğru teknikle, sürdürülebilir ve kesintisiz su kaynağı sağlamak. Teknolojik gelişmeleri takip ederek, sondaj maliyetlerini düşürürken kuyu ömrünü ve su kalitesini maksimum seviyeye çıkarmak.</p>
+      </div>
+      <div class="mv-card vision">
+        <h3>Vizyonumuz</h3>
+        <p>Marmara Bölgesi'nin en güvenilir ve donanımlı sondaj firması olmak. "Safa Dalgıç Pompa yaptıysa sağlamdır" algısını koruyarak, sektörde kalite ve güvenliğin standartlarını belirlemek.</p>
+      </div>
+    </div>
+
+    <div class="why-us">
+      <h2 class="text-center">Neden Bizi Tercih Etmelisiniz?</h2>
+      <div class="why-grid">
+        <div class="why-box">
+          <div class="icon">🚜</div>
+          <h4>Güçlü Makine Parkuru</h4>
+          <p>Hem yumuşak zeminler (Rotary) hem de sert kayalar (Havalı) için son teknoloji makinelerimizle her türlü arazide çalışıyoruz.</p>
+        </div>
+        <div class="why-box">
+          <div class="icon">👷‍♂️</div>
+          <h4>Mühendislik Yaklaşımı</h4>
+          <p>Ezbere iş yapmıyoruz. Jeofizik mühendislerimizle zemin etüdü yapıyor, "su çıkmaz" dediğimiz yerde sizi boşuna masrafa sokmuyoruz.</p>
+        </div>
+        <div class="why-box">
+          <div class="icon">📜</div>
+          <h4>Resmi & Ruhsatlı</h4>
+          <p>Kaçak kuyu riskine girmeyin. Tüm DSİ Arama ve Kullanma ruhsat süreçlerinizi uzman ekibimizle A'dan Z'ye takip ediyoruz.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </Layout>
 
 <style>
-    /* Markdown'dan gelen yazıların stili */
-    .prose-content h2 { color: #004494; font-size: 2rem; margin-bottom: 20px; }
-    .prose-content h3 { color: #333; font-size: 1.5rem; margin-top: 25px; margin-bottom: 10px; }
-    .prose-content p { margin-bottom: 15px; color: #666; }
+  /* GENEL AYARLAR */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* ÜST BANNER */
+  .page-header {
+    background: linear-gradient(rgba(0,51,102,0.9), rgba(0,51,102,0.8)), url('/images/hizmetler/su-kuyusu-sondaji.webp'); /* Arka plana varsa resim koyabilirsin */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 60px 0;
+    margin-bottom: 50px;
+  }
+  .page-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+
+  /* BİZ KİMİZ BÖLÜMÜ */
+  .about-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  .about-image-wrapper {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+  }
+  .about-image {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border: 5px solid white;
+  }
+  .experience-badge {
+    position: absolute;
+    top: 20px;
+    left: -10px;
+    background: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+  }
+  .about-text {
+    flex: 1.2;
+    min-width: 300px;
+  }
+  .section-title {
+    color: #003366;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #ff6600;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  .about-text p {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+  }
+
+  /* ÖZELLİK LİSTESİ */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .feature-item {
+    font-weight: 600;
+    color: #003366;
+    display: flex;
+    align-items: center;
+  }
+  .check-icon {
+    color: #ff6600;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  /* MİSYON VİZYON */
+  .mv-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 80px;
+  }
+  .mv-card {
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 5px solid;
+  }
+  .mv-card.mission {
+    background-color: #f0f7ff;
+    border-color: #003366;
+  }
+  .mv-card.vision {
+    background-color: #fff5eb;
+    border-color: #ff6600;
+  }
+  .mv-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  .mission h3 { color: #003366; }
+  .vision h3 { color: #d35400; }
+
+  /* NEDEN BİZ */
+  .why-us {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    border-radius: 20px;
+    margin-bottom: 60px;
+  }
+  .why-us h2 {
+    color: #003366;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  .why-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+  }
+  .why-box:hover {
+    transform: translateY(-5px);
+  }
+  .why-box .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  .why-box h4 {
+    color: #003366;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  .why-box p {
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  /* MOBİL AYARLAR */
+  @media (max-width: 768px) {
+    .mv-section {
+      grid-template-columns: 1fr;
+    }
+    .page-header h1 {
+      font-size: 1.8rem;
+    }
+  }
 </style>
