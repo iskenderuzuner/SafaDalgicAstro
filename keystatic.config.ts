@@ -47,7 +47,7 @@ export default config({
   // 2. KOLEKSİYONLAR (Hizmetler, Slider vb.)
   collections: {
     
-    // --- HİZMETLER (DÜZELTİLEN KISIM BURASI) ---
+    // --- HİZMETLERR (DÜZELTİLEN KISIM BURASI) ---
     hizmetler: collection({
       label: 'Hizmetlerimiz',
       slugField: 'title',
