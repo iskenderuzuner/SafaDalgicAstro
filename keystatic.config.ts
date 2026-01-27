@@ -3,11 +3,11 @@ import { config, fields, collection, singleton } from '@keystatic/core';
 export default config({
   storage: {
     kind: 'github',
-    repo: 'iskenderuzuner/SafaDalgicAstro', // Kendi repo adın
+    repo: 'iskenderuzuner/SafaDalgicAstro', 
   },
 
   // 1. TEKİL AYARLAR (Telefon, Adres vb.)
-singletons: {
+  singletons: {
     ayarlar: singleton({
       label: 'Genel Site Ayarları',
       path: 'src/content/ayarlar/genel',
@@ -27,7 +27,7 @@ singletons: {
           validation: { isRequired: true }
         }),
 
-        // 2. SEO ve Başlıklar (HATAYI ÇÖZEN KISIM BURASI: siteTitle eklendi)
+        // 2. SEO ve Başlıklar
         siteTitle: fields.text({ label: 'Site Başlığı (Örn: Safa Dalgıç Pompa)' }),
         seoDescription: fields.text({ 
             label: 'SEO Açıklaması (Google Özeti)', 
@@ -45,8 +45,10 @@ singletons: {
   },
 
   // 2. KOLEKSİYONLAR (Hizmetler, Slider vb.)
-      collections: {
-      hizmetler: collection({
+  collections: {
+    
+    // --- HİZMETLER (DÜZELTİLEN KISIM BURASI) ---
+    hizmetler: collection({
       label: 'Hizmetlerimiz',
       slugField: 'title',
       path: 'src/content/hizmetler/*',
@@ -64,14 +66,21 @@ singletons: {
           label: 'Sıralama No',
           defaultValue: 0,
         }),
+        // 👇 Resim ekleme özelliği eklendi 👇
         content: fields.markdoc({
           label: 'Hizmet İçeriği',
+          options: {
+            image: {
+              directory: 'public/images/hizmetler/icerik',
+              publicPath: '/images/hizmetler/icerik/',
+            },
+          },
         }),
+        // 👆 
       },
     }),
-        // 👆 DÜZENLEME BİTTİ
 
-    // YENİ EKLENEN SLIDER BÖLÜMÜ (Virgül hatası düzeltildi)
+    // --- SLIDER ---
     slider: collection({
       label: 'Slider (Manşet)',
       slugField: 'title',
@@ -91,7 +100,7 @@ singletons: {
       },
     }),
     
-    // 3. BLOG
+    // --- BLOG ---
     blog: collection({
       label: 'Blog Yazıları',
       slugField: 'title',
@@ -120,7 +129,7 @@ singletons: {
       },
     }),
 
-    // 4. MÜŞTERİ YORUMLARI
+    // --- MÜŞTERİ YORUMLARI ---
     yorumlar: collection({
       label: 'Müşteri Yorumları',
       slugField: 'isim',
@@ -137,8 +146,6 @@ singletons: {
         }),
       },
     }),
-
-    
 
   },
 });
