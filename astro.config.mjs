@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import markdoc from '@astrojs/markdoc';
-import vercel from '@astrojs/vercel/serverless'; // <--- BU SATIR EKSİK OLDUĞU İÇİN HATA VERİYOR
-import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel/serverless';
+// import sitemap iptal edildi
 
 export default defineConfig({
   site: 'https://safadalgicpompa.com',
@@ -13,6 +13,6 @@ export default defineConfig({
     react(),
     keystatic(),
     markdoc(),
-    sitemap({})
+    // sitemap() iptal edildi
   ]
 });
