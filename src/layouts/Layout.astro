@@ -88,7 +88,7 @@ const schemaData = {
     <title>{sayfaBasligi}</title>
     <meta name="description" content={sayfaAciklamasi}>
     <link rel="canonical" href={canonicalURL} />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="index, follow" />
     <meta property="og:type" content={type} />
     {articleDate && (
         <meta property="article:published_time" content={new Date(articleDate).toISOString()} />
@@ -105,6 +105,15 @@ const schemaData = {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+       <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWL807NJ5B"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LWL807NJ5B');
+    </script>
 </head>
 <body>
 
