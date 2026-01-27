@@ -93,9 +93,9 @@ const sonBloglar = blogYazilari.slice(0, 3);
             <div class="service-grid">
                 {tumHizmetler.map((hizmet) => (
                     <div class="service-card">
-                        <img src={hizmet.data.image} alt={hizmet.data.title} style="height: 250px; object-fit: cover;">
+                        <a href={`/hizmetler/${hizmet.slug}`}><img src={hizmet.data.image} alt={hizmet.data.title} style="height: 250px; object-fit: cover;"></a>
                         <div class="service-content">
-                            <h3>{hizmet.data.title}</h3>
+                            <h3><a href={`/hizmetler/${hizmet.slug}`}>{hizmet.data.title}</h3></a>
                             <p>{hizmet.data.description}</p>
                             <a href={`/hizmetler/${hizmet.slug}`} style="color: #004494; font-weight: bold; margin-top: 10px; display: inline-block;">
                                 İncele <i class="fas fa-arrow-right"></i>
