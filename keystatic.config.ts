@@ -45,7 +45,7 @@ singletons: {
   },
 
   // 2. KOLEKSİYONLAR (Hizmetler, Slider vb.)
-  hizmetler: collection({
+      hizmetler: collection({
       label: 'Hizmetlerimiz',
       slugField: 'title',
       path: 'src/content/hizmetler/*',
@@ -53,7 +53,6 @@ singletons: {
       schema: {
         title: fields.slug({ name: { label: 'Hizmet Başlığı' } }),
         description: fields.text({ label: 'Kısa Açıklama (SEO)' }),
-        // Kapak Resmi (Bu zaten çalışıyordu ama dursun)
         image: fields.image({
           label: 'Kapak Resmi',
           directory: 'public/images/hizmetler',
@@ -64,14 +63,14 @@ singletons: {
           label: 'Sıralama No',
           defaultValue: 0,
         }),
-        // 👇 ASIL DÜZELTME BURADA 👇
+        // 👇 DÜZELTİLEN KISIM BURASI 👇
         content: fields.markdoc({
           label: 'Hizmet İçeriği',
           options: {
             image: {
-              // İçerik içine eklenen fotolar buraya gitsin:
+              // Yazı içine eklenen resimleri buraya kaydeder:
               directory: 'public/images/hizmetler/icerik',
-              // Kod tarafında da böyle görünsün:
+              // Kodun içine de bu yolu yazar (/ işareti ile başladığı için hata vermez):
               publicPath: '/images/hizmetler/icerik/',
             },
           },
