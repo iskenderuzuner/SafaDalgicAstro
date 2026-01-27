@@ -74,9 +74,7 @@ singletons: {
           },
         }),
         // 👆 DÜZENLEME BİTTİ
-      },
-    }),
-
+        
     // YENİ EKLENEN SLIDER BÖLÜMÜ (Virgül hatası düzeltildi)
     slider: collection({
       label: 'Slider (Manşet)',
