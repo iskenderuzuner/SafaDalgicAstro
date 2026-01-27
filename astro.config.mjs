@@ -3,16 +3,16 @@ import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import markdoc from '@astrojs/markdoc';
 import vercel from '@astrojs/vercel/serverless';
-import sitemap from '@astrojs/sitemap'; // 1. EKLENEN: Sitemap importu
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://safadalgicpompa.com', // 2. EKLENEN: Site adresin (Sitemap için şart)
+  site: 'https://safadalgicpompa.com', // Site adresi doğru
   output: 'hybrid',
   adapter: vercel(),
   integrations: [
     react(),
     keystatic(),
     markdoc(),
-    sitemap() // 3. EKLENEN: Entegrasyon listesine ekledik
+    sitemap() // Eğer yine hata verirse burayı sitemap({}) yapmayı deneriz.
   ]
 });
