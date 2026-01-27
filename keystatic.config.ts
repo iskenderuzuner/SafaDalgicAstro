@@ -63,19 +63,17 @@ singletons: {
           label: 'Sıralama No',
           defaultValue: 0,
         }),
-        // 👇 DÜZELTİLEN KISIM BURASI 👇
+        // 👇 DÜZENLENEN KISIM (Resim ayarı eklendi)
         content: fields.markdoc({
           label: 'Hizmet İçeriği',
           options: {
             image: {
-              // Yazı içine eklenen resimleri buraya kaydeder:
               directory: 'public/images/hizmetler/icerik',
-              // Kodun içine de bu yolu yazar (/ işareti ile başladığı için hata vermez):
               publicPath: '/images/hizmetler/icerik/',
             },
           },
         }),
-        // 👆 DÜZELTME BİTTİ 👆
+        // 👆 DÜZENLEME BİTTİ
       },
     }),
 
