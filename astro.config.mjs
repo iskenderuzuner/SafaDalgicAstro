@@ -1,18 +1,15 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import keystatic from '@keystatic/astro';
-import markdoc from '@astrojs/markdoc';
-import vercel from '@astrojs/vercel/serverless';
+// ... diğer importlar ...
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://safadalgicpompa.com', // Site adresi doğru
+  site: 'https://safadalgicpompa.com', // BU SATIR KESİN OLMALI
   output: 'hybrid',
   adapter: vercel(),
   integrations: [
     react(),
     keystatic(),
     markdoc(),
-    sitemap() // Eğer yine hata verirse burayı sitemap({}) yapmayı deneriz.
+    sitemap({}) // BURAYI DEĞİŞTİRDİK (İçine {} koyduk)
   ]
 });
