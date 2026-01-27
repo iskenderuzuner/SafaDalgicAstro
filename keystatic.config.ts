@@ -45,6 +45,7 @@ singletons: {
   },
 
   // 2. KOLEKSİYONLAR (Hizmetler, Slider vb.)
+      collections: {
       hizmetler: collection({
       label: 'Hizmetlerimiz',
       slugField: 'title',
@@ -63,18 +64,13 @@ singletons: {
           label: 'Sıralama No',
           defaultValue: 0,
         }),
-        // 👇 DÜZENLENEN KISIM (Resim ayarı eklendi)
         content: fields.markdoc({
           label: 'Hizmet İçeriği',
-          options: {
-            image: {
-              directory: 'public/images/hizmetler/icerik',
-              publicPath: '/images/hizmetler/icerik/',
-            },
-          },
         }),
+      },
+    }),
         // 👆 DÜZENLEME BİTTİ
-        
+
     // YENİ EKLENEN SLIDER BÖLÜMÜ (Virgül hatası düzeltildi)
     slider: collection({
       label: 'Slider (Manşet)',
