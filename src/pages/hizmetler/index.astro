@@ -1,0 +1,110 @@
+---
+export const prerender = true;
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Hizmetleri çek (Date sıralamasına gerek yok ama istersen ekleyebiliriz)
+const tumHizmetler = await getCollection('hizmetler');
+// İsteğe bağlı: Başlığa göre alfabetik sıralama
+// tumHizmetler.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<Layout 
+    title="Hizmetlerimiz | Safa Dalgıç Pompa" 
+    description="Su sondajı, dalgıç pompa satışı, montajı, kuyu temizliği ve diğer tüm profesyonel hizmetlerimiz."
+    type="website">
+  
+  <section class="page-header">
+    <div class="container">
+      <h1>Hizmetlerimiz</h1>
+      <p>Su teknolojileri ve sondaj alanında sunduğumuz profesyonel çözümler.</p>
+    </div>
+  </section>
+
+  <section class="service-list-section">
+    <div class="container">
+      <div class="service-grid">
+        {tumHizmetler.map((hizmet) => (
+          <article class="service-card">
+            <div class="card-image">
+              <a href={`/hizmetler/${hizmet.slug}`}>
+                <img src={hizmet.data.image} alt={hizmet.data.title} loading="lazy" />
+              </a>
+            </div>
+            <div class="card-content">
+              <h3>
+                <a href={`/hizmetler/${hizmet.slug}`}>{hizmet.data.title}</a>
+              </h3>
+              <p>
+                {hizmet.data.description ? hizmet.data.description.slice(0, 120) + '...' : 'Hizmet detaylarını görüntülemek için tıklayınız.'}
+              </p>
+              <a href={`/hizmetler/${hizmet.slug}`} class="btn-read-more">İncele</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* Sayfa Başlığı */
+  .page-header {
+    background: #f4f4f4;
+    padding: 60px 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  .page-header h1 { color: #004494; margin-bottom: 10px; font-size: 2.5rem; }
+  .page-header p { color: #666; font-size: 1.1rem; }
+
+  /* Grid Yapısı */
+  .service-list-section { padding: 60px 0; }
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  /* Kart Tasarımı */
+  .service-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+
+  .card-image { height: 220px; overflow: hidden; }
+  .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .service-card:hover .card-image img { transform: scale(1.05); }
+
+  .card-content { padding: 25px; }
+  
+  /* Hizmetlerde tarih olmadığı için o kısmı kaldırdım */
+  
+  .card-content h3 { margin-bottom: 15px; font-size: 1.3rem; line-height: 1.4; }
+  .card-content h3 a { color: #333; text-decoration: none; transition: color 0.3s; }
+  .card-content h3 a:hover { color: #004494; }
+
+  .card-content p { font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 20px; }
+
+  .btn-read-more {
+    display: inline-block;
+    background: #f4f4f4;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-read-more:hover { background: #004494; color: #fff; }
+</style>
