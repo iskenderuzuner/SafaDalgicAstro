@@ -303,5 +303,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
   }
 </style>
+// </body>'den önce script olarak ekle:
+<script>
+    // URL'de ?basarili=true var mı kontrol et
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('basarili')) {
+        alert("Mesajınız başarıyla alındı! En kısa sürede size döneceğiz.");
+        // Veya sayfada gizli bir "Teşekkürler" kutusunu görünür yapabilirsin.
+    }
+</script>
 </body>
 </html>

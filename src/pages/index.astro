@@ -196,17 +196,22 @@ const sonBloglar = blogYazilari.slice(0, 3);
                 </div>
 
                 <div class="form-box">
-                    <form>
+                    <form action="https://formsubmit.co/iskenderuzuner@gmail.com" 
+    method="POST"
+    class="contact-form">
                         <div class="form-group">
-                            <input type="text" placeholder="Adınız Soyadınız" required>
+                        <input type="text" name="_honey" style="display:none">
+                        <input type="hidden" name="_captcha" value="false">
+                            <input type="text" name="ad_soyad" placeholder="Adınız Soyadınız" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" placeholder="Telefon Numaranız" required>
+                            <input type="tel" name="telefon" placeholder="Telefon Numaranız" required>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Mesajınız" rows="4"></textarea>
+                            <textarea placeholder="Mesajınız" name="mesaj" rows="4"></textarea>
                         </div>
                         <button type="submit" class="btn-submit">GÖNDER</button>
+                        <input type="hidden" name="_next" value="https://safadalgicpompa.com/?basarili=true">
                     </form>
                 </div>
             </div>
