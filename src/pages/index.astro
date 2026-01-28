@@ -207,7 +207,16 @@ const sonBloglar = blogYazilari.slice(0, 3);
                         <input type="text" name="ad_soyad" required placeholder="Adınız Soyadınız">
                         </div>
                         <div class="form-group">
-                            <input type="tel" name="telefon" placeholder="Telefon Numaranız" required>
+                            <input 
+                                type="tel" 
+                                name="telefon" 
+                                id="phoneInput" 
+                                placeholder="0555XXXXXXX" 
+                                maxlength="11" 
+                                pattern="05[0-9]{9}" 
+                                title="Lütfen numaranızı başında 0 olacak şekilde 11 hane olarak giriniz (Örn: 05551234567)"
+                                required
+                                >
                         </div>
                         <div class="form-group">
                             <textarea placeholder="Mesajınız" name="mesaj" rows="4"></textarea>

@@ -305,6 +305,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </style>
 // </body>'den önce script olarak ekle:
 <script>
+    // 1. TELEFON NUMARASI FİLTRESİ (Sadece Rakam)
+  const phoneInput = document.getElementById('phoneInput');
+
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function(e) {
+      // Girilen değerden rakam olmayan her şeyi sil
+      let value = this.value.replace(/[^0-9]/g, '');
+
+      // Eğer kullanıcı ilk rakamı sildiyse ve sayı yazmaya çalışıyorsa
+      // ve ilk rakam '0' değilse, otomatik '0' ekleyebiliriz (İsteğe bağlı)
+      /* if (value.length > 0 && value[0] !== '0') {
+         value = '0' + value;
+      } 
+      */
+
+      // Maksimum 11 hane sınırı (HTML'de maxlength var ama JS ile de garanti edelim)
+      if (value.length > 11) {
+        value = value.slice(0, 11);
+      }
+
+      this.value = value;
+    });
+  }
+
+  // ... (Burada daha önce yazdığımız Form Gönderme kodları duracak) ...
+  const form = document.getElementById('anasayfa-formu');
+  // ... kodun kalanı aynen devam ediyor ...
+
   const form = document.getElementById('anasayfa-formu');
   const messageDiv = document.getElementById('form-message');
   const submitBtn = document.getElementById('submit-btn');
