@@ -196,13 +196,15 @@ const sonBloglar = blogYazilari.slice(0, 3);
                 </div>
 
                 <div class="form-box">
-                    <form action="https://formsubmit.co/iskenderuzuner@gmail.com" 
-    method="POST"
-    class="contact-form">
+                    <form id="anasayfa-formu"
+  action="https://formsubmit.co/iskenderuzuner@gmail.com" 
+  method="POST"
+  class="contact-form">
                         <div class="form-group">
                         <input type="text" name="_honey" style="display:none">
                         <input type="hidden" name="_captcha" value="false">
-                            <input type="text" name="ad_soyad" placeholder="Adınız Soyadınız" required>
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="ad_soyad" required placeholder="Adınız Soyadınız">
                         </div>
                         <div class="form-group">
                             <input type="tel" name="telefon" placeholder="Telefon Numaranız" required>
@@ -210,8 +212,8 @@ const sonBloglar = blogYazilari.slice(0, 3);
                         <div class="form-group">
                             <textarea placeholder="Mesajınız" name="mesaj" rows="4"></textarea>
                         </div>
-                        <button type="submit" class="btn-submit">GÖNDER</button>
-                        <input type="hidden" name="_next" value="https://safadalgicpompa.com/?basarili=true">
+                        <div id="form-message" style="display:none; margin-bottom:15px; padding:10px; border-radius:5px;"></div>
+                        <button type="submit" class="btn-submit" id="submit-btn">GÖNDER</button>
                     </form>
                 </div>
             </div>
