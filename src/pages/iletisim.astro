@@ -49,26 +49,34 @@ import Layout from '../layouts/Layout.astro';
                     </div>
                 </div>
 
-                <div class="form-box">
-                    <form>
+                 <div class="form-box">
+                    <form id="anasayfa-formu"
+                        action="https://formsubmit.co/iskenderuzuner@gmail.com" 
+                        method="POST"
+                        class="contact-form">
                         <div class="form-group">
-                            <input type="text" placeholder="Adınız Soyadınız" required>
+                        <input type="text" name="_honey" style="display:none">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="ad_soyad" required placeholder="Adınız Soyadınız">
                         </div>
                         <div class="form-group">
-                            <input type="tel" placeholder="Telefon Numaranız" required>
+                            <input 
+                                type="tel" 
+                                name="telefon" 
+                                id="phoneInput" 
+                                placeholder="0555XXXXXXX" 
+                                maxlength="11" 
+                                pattern="05[0-9]{9}" 
+                                title="Lütfen numaranızı başında 0 olacak şekilde 11 hane olarak giriniz (Örn: 05551234567)"
+                                required
+                                >
                         </div>
                         <div class="form-group">
-                            <select>
-                                <option value="">Hizmet Seçiniz</option>
-                                <option value="sondaj">Su Sondajı</option>
-                                <option value="pompa">Dalgıç Pompa</option>
-                                <option value="bakim">Kuyu Bakımı</option>
-                            </select>
+                            <textarea placeholder="Mesajınız" name="mesaj" rows="4"></textarea>
                         </div>
-                        <div class="form-group">
-                            <textarea placeholder="Mesajınız" rows="4"></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">GÖNDER</button>
+                        <div id="form-message" style="display:none; margin-bottom:15px; padding:10px; border-radius:5px;"></div>
+                        <button type="submit" class="btn-submit" id="submit-btn">GÖNDER</button>
                     </form>
                 </div>
             </div>
