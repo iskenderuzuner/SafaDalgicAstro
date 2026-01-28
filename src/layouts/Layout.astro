@@ -209,5 +209,89 @@ const schemaData = {
     </footer>
 
     <script src="/js/script.js" is:inline></script>
+    <div class="mobile-contact-bar">
+  <a href="tel:+905325406829" class="contact-btn btn-call">
+    <i class="fas fa-phone-alt"></i>
+    <span>Hemen Ara</span>
+  </a>
+
+  <a href="https://wa.me/905325406829?text=Merhaba,%20sondaj%20hizmetleri%20hakkında%20bilgi%20almak%20istiyorum." target="_blank" class="contact-btn btn-whatsapp">
+    <i class="fab fa-whatsapp"></i>
+    <span>WhatsApp'tan Yaz</span>
+  </a>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  /* 1. GENEL AYARLAR (Mobil Öncelikli) */
+  .mobile-contact-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    display: flex;
+    z-index: 9999; /* Her şeyin üstünde dursun */
+    box-shadow: 0 -2px 15px rgba(0,0,0,0.1); /* Hafif gölge */
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .contact-btn {
+    flex: 1; /* İkisini eşit böler %50 - %50 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    gap: 10px; /* İkon ile yazı arası boşluk */
+    transition: background 0.3s;
+  }
+
+  /* 2. RENKLER */
+  .btn-call {
+    background-color: #004494; /* SENİN TEMANIN MAVİSİ */
+  }
+  .btn-call:hover {
+    background-color: #003370; /* Üzerine gelince koyulaşsın */
+  }
+
+  .btn-whatsapp {
+    background-color: #25D366; /* WHATSAPP YEŞİLİ */
+  }
+  .btn-whatsapp:hover {
+    background-color: #1ebc57;
+  }
+
+  /* İkon Ayarları */
+  .contact-btn i {
+    font-size: 20px;
+  }
+
+  /* 3. BİLGİSAYAR GÖRÜNÜMÜ (PC'de kocaman çubuk olmasın diye) */
+  @media (min-width: 769px) {
+    .mobile-contact-bar {
+      width: auto;      /* Tam ekran olmasın */
+      left: auto;       /* Sola yaslanmasın */
+      right: 20px;      /* Sağdan 20px boşluk */
+      bottom: 20px;     /* Alttan 20px boşluk */
+      background: transparent;
+      box-shadow: none;
+      flex-direction: column; /* Alt alta dizilsin */
+      gap: 10px;        /* Aralarında boşluk olsun */
+      height: auto;
+    }
+
+    .contact-btn {
+      width: 200px;     /* Sabit genişlik */
+      border-radius: 50px; /* Yuvarlak kenarlar */
+      padding: 12px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+  }
+</style>
 </body>
 </html>
