@@ -629,26 +629,3 @@ footer { background: #1a1a1a; color: #bbb; padding: 80px 0 30px; }
     font-weight: bolder;
 }
 
-/* style.css içindeki tablo kodunu bununla değiştir */
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-  min-width: 600px; /* Tabloyu geniş olmaya zorla ki kaydırma çubuğu çıksın */
-}
-
-th, td {
-  padding: 12px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-thead tr {
-  background-color: #004494;
-  color: white;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
