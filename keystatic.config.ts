@@ -121,6 +121,7 @@ export default config({
             formatting: true,
             dividers: true,
             links: true,
+            tables: true,
             images: {
               directory: 'public/images/blog/icerik',
               publicPath: '/images/blog/icerik/',
