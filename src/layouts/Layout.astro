@@ -396,5 +396,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 </script>
 <SpeedInsights />
+
+<script>
+  // Sayfa yüklendiğinde çalışır
+  document.addEventListener('DOMContentLoaded', () => {
+    // Sayfadaki tüm tabloları bul
+    const tables = document.querySelectorAll('table');
+
+    tables.forEach((table) => {
+      // Zaten bir kapsayıcısı yoksa işlem yap
+      if (!table.parentElement.classList.contains('table-responsive-wrapper')) {
+        
+        // Yeni bir sarmalayıcı div oluştur
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-responsive-wrapper';
+        
+        // Bu div'e CSS özellikleri ver (Kaydırma özelliği burada)
+        wrapper.style.overflowX = 'auto';
+        wrapper.style.width = '100%';
+        wrapper.style.marginBottom = '20px';
+        wrapper.style.border = '1px solid #eee'; // İsteğe bağlı çerçeve
+        wrapper.style.borderRadius = '8px'; // Köşeleri yuvarla
+        
+        // Tabloyu bulunduğu yerden alıp bu div'in içine koy
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      }
+    });
+  });
+</script>
 </body>
 </html>
