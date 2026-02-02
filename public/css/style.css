@@ -629,47 +629,52 @@ footer { background: #1a1a1a; color: #bbb; padding: 80px 0 30px; }
     font-weight: bolder;
 }
 
-/* --- KESİN ÇALIŞAN TABLO STİLİ --- */
-
-/* 1. Sadece 'blog-icerigi' içindeki tabloları hedefle */
-.blog-icerigi table {
+/* --- BLOG TABLO TASARIMI --- */
+/* Tablo genel çerçevesi */
+table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 30px 0;
-  font-size: 16px;
+  border-collapse: collapse; /* Çift çizgiyi engeller */
+  margin: 25px 0;
+  font-size: 0.95rem;
   font-family: sans-serif;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
-  border-radius: 8px; /* Köşeleri yuvarla */
-  overflow: hidden; /* Köşelerin taşmasını engelle */
+  min-width: 400px; /* Mobilde çok sıkışmasın */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05); /* Hafif gölge */
 }
 
-/* 2. Başlık Satırı (Mavi Alan) */
-.blog-icerigi table thead tr {
-  background-color: #004494; /* Senin Mavi Rengin */
+/* Başlık (En üst satır) */
+table thead tr {
+  background-color: #004494; /* Senin logonun mavisi */
   color: #ffffff;
   text-align: left;
   font-weight: bold;
 }
 
-/* 3. Hücre Ayarları */
-.blog-icerigi table th,
-.blog-icerigi table td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #dddddd; /* Sadece alt çizgi */
-  border-right: 1px solid #eeeeee; /* Hafif sağ çizgi */
+/* Hücreler */
+table th,
+table td {
+  padding: 12px 15px; /* İç boşluk */
+  border: 1px solid #dddddd; /* İnce gri çizgiler */
 }
 
-/* 4. Satır Renklendirme (Zebra) */
-.blog-icerigi table tbody tr:nth-of-type(even) {
-  background-color: #f3f8ff; /* Çok açık mavi/gri ton */
+/* Satırlar (Zebra deseni) */
+table tbody tr {
+  border-bottom: 1px solid #dddddd;
 }
 
-/* 5. Alt Çizgiyi Kaldır (Son satırda) */
-.blog-icerigi table tbody tr:last-of-type {
-  border-bottom: 3px solid #004494; /* Bitiş çizgisi kalın olsun */
+table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3; /* Bir satır gri, bir satır beyaz */
 }
 
-/* 6. Mobil Uyumluluk (Telefonda tablo taşmasın) */
-.blog-icerigi {
-  overflow-x: auto; /* Yazı kutusuna kaydırma özelliği ver */
+/* En alt çizgi mavi olsun */
+table tbody tr:last-of-type {
+  border-bottom: 2px solid #004494;
+}
+
+/* Mobilde tablo taşarsa yana kaydırılabilsin */
+@media screen and (max-width: 600px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
