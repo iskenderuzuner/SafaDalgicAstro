@@ -629,62 +629,60 @@ footer { background: #1a1a1a; color: #bbb; padding: 80px 0 30px; }
     font-weight: bolder;
 }
 
-/* --- BLOG TABLO TASARIMI (Mobil Uyumlu) --- */
+/* --- GÜNCELLENMİŞ RESPONSIVE TABLO TASARIMI --- */
 
-/* Tablo Genel Ayarları */
+/* Tablo Genel Ayarı */
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 25px 0;
-  font-size: 0.95rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #ffffff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  font-size: 0.9rem; /* Telefonda font biraz küçülsün */
+  font-family: sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  overflow: hidden; /* Köşelerin yuvarlak kalmasını sağlar */
+  background-color: #fff;
   
-  /* MOBİL İÇİN KRİTİK AYARLAR: */
-  display: block; /* Tabloyu blok element yap */
-  overflow-x: auto; /* Sağa sola kaydırmayı aç */
-  white-space: nowrap; /* Yazıların alt satıra geçip tabloyu çirkinleştirmesini engelle */
+  /* MOBİL UYUM SİHRİ BURADA: */
+  display: block;        /* Tabloyu bir kutu gibi davranmaya zorla */
+  overflow-x: auto;      /* Sağa-sola kaydırma çubuğu ekle */
+  white-space: nowrap;   /* Satırları kırma, yan yana dizili kalsın */
+  
+  /* Min-width SİLİNDİ! Artık taşma yapmaz. */
 }
 
-/* Başlık Satırı (Mavi Alan) */
+/* Başlık Alanı */
 table thead tr {
-  background-color: #004494; /* Senin Mavi Rengin */
+  background-color: #004494;
   color: #ffffff;
   text-align: left;
-  font-weight: bold;
 }
 
-/* Hücre Ayarları */
-table th, 
-table td {
+/* Hücreler */
+table th, table td {
   padding: 12px 15px;
   border: 1px solid #e0e0e0;
 }
 
-/* Satır Renklendirme (Zebra) */
+/* Satır Renklendirmesi */
 table tbody tr {
   border-bottom: 1px solid #dddddd;
 }
 
 table tbody tr:nth-of-type(even) {
-  background-color: #f8f9fa; /* Açık gri/beyaz ton */
+  background-color: #f8f9fa;
 }
 
-/* Son satırın alt çizgisi kalın olsun */
 table tbody tr:last-of-type {
   border-bottom: 3px solid #004494;
 }
 
-/* Kaydırma çubuğu (Scrollbar) tasarımı - Opsiyonel, şık durur */
+/* Scrollbar (Kaydırma Çubuğu) Tasarımı - Daha şık görünsün */
 table::-webkit-scrollbar {
-  height: 8px;
+  height: 6px; /* İnce bir çubuk */
 }
 table::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
+  background: #004494; /* Mavi renk */
+  border-radius: 3px;
 }
 table::-webkit-scrollbar-track {
   background: #f1f1f1;
