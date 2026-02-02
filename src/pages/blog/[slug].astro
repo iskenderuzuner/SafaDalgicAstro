@@ -52,7 +52,9 @@ const metinKisalt = (metin, limit = 50) => {
           </div>
 
           <article class="article-content">
+            <div class="blog-icerigi"> 
             <Content />
+            </div>
           </article>
 
           <div class="article-footer">
@@ -267,54 +269,48 @@ const metinKisalt = (metin, limit = 50) => {
   }
 
 
-  /* Blog İçi Tablo Tasarımı - Google Snippet Uyumlu */
-/* --- BLOG TABLO TASARIMI --- */
-/* Tablo genel çerçevesi */
-table {
+/* --- KESİN ÇALIŞAN TABLO STİLİ --- */
+
+/* 1. Sadece 'blog-icerigi' içindeki tabloları hedefle */
+.blog-icerigi table {
   width: 100%;
-  border-collapse: collapse; /* Çift çizgiyi engeller */
-  margin: 25px 0;
-  font-size: 0.95rem;
+  border-collapse: collapse;
+  margin: 30px 0;
+  font-size: 16px;
   font-family: sans-serif;
-  min-width: 400px; /* Mobilde çok sıkışmasın */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05); /* Hafif gölge */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+  border-radius: 8px; /* Köşeleri yuvarla */
+  overflow: hidden; /* Köşelerin taşmasını engelle */
 }
 
-/* Başlık (En üst satır) */
-table thead tr {
-  background-color: #004494; /* Senin logonun mavisi */
+/* 2. Başlık Satırı (Mavi Alan) */
+.blog-icerigi table thead tr {
+  background-color: #004494; /* Senin Mavi Rengin */
   color: #ffffff;
   text-align: left;
   font-weight: bold;
 }
 
-/* Hücreler */
-table th,
-table td {
-  padding: 12px 15px; /* İç boşluk */
-  border: 1px solid #dddddd; /* İnce gri çizgiler */
+/* 3. Hücre Ayarları */
+.blog-icerigi table th,
+.blog-icerigi table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #dddddd; /* Sadece alt çizgi */
+  border-right: 1px solid #eeeeee; /* Hafif sağ çizgi */
 }
 
-/* Satırlar (Zebra deseni) */
-table tbody tr {
-  border-bottom: 1px solid #dddddd;
+/* 4. Satır Renklendirme (Zebra) */
+.blog-icerigi table tbody tr:nth-of-type(even) {
+  background-color: #f3f8ff; /* Çok açık mavi/gri ton */
 }
 
-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3; /* Bir satır gri, bir satır beyaz */
+/* 5. Alt Çizgiyi Kaldır (Son satırda) */
+.blog-icerigi table tbody tr:last-of-type {
+  border-bottom: 3px solid #004494; /* Bitiş çizgisi kalın olsun */
 }
 
-/* En alt çizgi mavi olsun */
-table tbody tr:last-of-type {
-  border-bottom: 2px solid #004494;
-}
-
-/* Mobilde tablo taşarsa yana kaydırılabilsin */
-@media screen and (max-width: 600px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+/* 6. Mobil Uyumluluk (Telefonda tablo taşmasın) */
+.blog-icerigi {
+  overflow-x: auto; /* Yazı kutusuna kaydırma özelliği ver */
 }
 </style>
