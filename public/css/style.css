@@ -629,62 +629,26 @@ footer { background: #1a1a1a; color: #bbb; padding: 80px 0 30px; }
     font-weight: bolder;
 }
 
+/* style.css içindeki tablo kodunu bununla değiştir */
 
-/* --- GÜNCELLENMİŞ RESPONSIVE TABLO TASARIMI --- */
-
-/* Tablo Genel Ayarı */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 0.9rem; /* Telefonda font biraz küçülsün */
-  font-family: sans-serif;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  background-color: #fff;
-  
-  /* MOBİL UYUM SİHRİ BURADA: */
-  display: block;        /* Tabloyu bir kutu gibi davranmaya zorla */
-  overflow-x: auto;      /* Sağa-sola kaydırma çubuğu ekle */
-  white-space: nowrap;   /* Satırları kırma, yan yana dizili kalsın */
-  
-  /* Min-width SİLİNDİ! Artık taşma yapmaz. */
+  font-size: 0.9rem;
+  min-width: 600px; /* Tabloyu geniş olmaya zorla ki kaydırma çubuğu çıksın */
 }
 
-/* Başlık Alanı */
-table thead tr {
-  background-color: #004494;
-  color: #ffffff;
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
   text-align: left;
 }
 
-/* Hücreler */
-table th, table td {
-  padding: 12px 15px;
-  border: 1px solid #e0e0e0;
+thead tr {
+  background-color: #004494;
+  color: white;
 }
 
-/* Satır Renklendirmesi */
-table tbody tr {
-  border-bottom: 1px solid #dddddd;
-}
-
-table tbody tr:nth-of-type(even) {
-  background-color: #f8f9fa;
-}
-
-table tbody tr:last-of-type {
-  border-bottom: 3px solid #004494;
-}
-
-/* Scrollbar (Kaydırma Çubuğu) Tasarımı - Daha şık görünsün */
-table::-webkit-scrollbar {
-  height: 6px; /* İnce bir çubuk */
-}
-table::-webkit-scrollbar-thumb {
-  background: #004494; /* Mavi renk */
-  border-radius: 3px;
-}
-table::-webkit-scrollbar-track {
-  background: #f1f1f1;
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
