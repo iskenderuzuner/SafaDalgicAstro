@@ -135,7 +135,17 @@ const sonBloglar = blogYazilari.slice(0, 3);
             <div class="service-grid">
                 {tumHizmetler.map((hizmet) => (
                     <div class="service-card">
-                        <a href={`/hizmetler/${hizmet.slug}`}><img src={hizmet.data.image} alt={hizmet.data.title} style="height: 250px; object-fit: cover;"></a>
+                        <a href={`/hizmetler/${hizmet.slug}`}>
+                            <img 
+                                src={hizmet.data.image} 
+                                alt={hizmet.data.title} 
+                                width="360" 
+                                height="250" 
+                                loading="lazy" 
+                                decoding="async" 
+                                style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px;"
+                            />
+                            </a>
                         <div class="service-content">
                             <h3><a href={`/hizmetler/${hizmet.slug}`}>{hizmet.data.title}</h3></a>
                             <p>{hizmet.data.description}</p>
@@ -185,8 +195,17 @@ const sonBloglar = blogYazilari.slice(0, 3);
                 {sonBloglar.length > 0 ? (
                     sonBloglar.map((yazi) => (
                         <article class="blog-card" style="border: 1px solid #eee; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                            <a href={`/blog/${yazi.slug}`}><img src={yazi.data.image} alt={yazi.data.title} style="width: 100%; height: 200px; object-fit: cover;"></a>
-                            
+                            <a href={`/blog/${yazi.slug}`}>
+                            <img 
+                                src={yazi.data.image} 
+                                alt={yazi.data.title} 
+                                width="365" 
+                                height="200" 
+                                loading="lazy" 
+                                decoding="async" 
+                                style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;"
+                            />
+                            </a>                            
                             <div class="blog-content" style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column;">
                                 <span style="font-size: 0.85em; color: #888; margin-bottom: 5px;">
                                     {new Date(yazi.data.date).toLocaleDateString('tr-TR')}
