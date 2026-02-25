@@ -3,6 +3,18 @@ export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+// 1. Astro'nun İmaj bileşenini çağırıyoruz
+import { Image } from 'astro:assets';
+
+// 2. Resmi projenin içinden import ediyoruz
+import anasayfaResmi from '../assets/images/genel/safa-sondaj-anasayfa.webp';
+import anasayfaResmi1 from '../assets/images/genel/anasayfa1.webp';
+import anasayfaResmi2 from '../assets/images/genel/anasayfa2.webp';
+import anasayfaResm3 from '../assets/images/genel/anasayfa3.webp';
+
+
+
+
 // 1. Hizmetleri Çek
 const tumHizmetler = await getCollection('hizmetler');
 tumHizmetler.sort((a, b) => a.data.order - b.data.order);
@@ -60,7 +72,15 @@ const sonBloglar = blogYazilari.slice(0, 3);
             <div class="about-intro-grid">
                 <div class="about-large-img">
                     <div class="experience-badge">20+ Yıllık Tecrübe</div>
-                    <img src="/images/genel/safa-sondaj-anasayfa.webp" alt="Profesyonel Sondaj Makinesi">
+                    <Image 
+                            src={anasayfaResmi} 
+                            alt="Profesyonel Sondaj Makinesi" 
+                            width={800} 
+                            height={600} 
+                            quality={60}
+                            loading="lazy" 
+                            decoding="async"
+                            />
                 </div>
                 <div class="about-text-content">
                     <h2>Güvenilir Çözüm Ortağınız</h2>
@@ -68,10 +88,42 @@ const sonBloglar = blogYazilari.slice(0, 3);
                     <p>Marmara bölgesinin zorlu zemin koşullarında edindiğimiz tecrübe ile su sondajı, kuyu temizliği ve pompa kurulumunda en yüksek verimi garanti ediyoruz. İş güvenliği standartlarına uygun, modern makine parkurumuzla projelerinizi zamanında teslim ediyoruz.</p>
                     
                     <div class="about-work-gallery">
-                        <img src="/images/genel/safa-sondaj-anasayfa.webp" alt="Saha Çalışması">
-                        <img src="/images/genel/anasayfa1.webp" alt="Pompa Kurulumu">
-                        <img src="/images/genel/anasayfa2.webp" alt="Kuyu Açma">
-                        <img src="/images/genel/anasayfa3.webp" alt="Teknik Ekip">
+                        <Image 
+                            src={anasayfaResmi} 
+                            alt="Saha Çalışması" 
+                            width={250} 
+                            height={136} 
+                            quality={60}
+                            loading="lazy" 
+                            decoding="async"
+                            />
+                         <Image 
+                            src={anasayfaResmi1} 
+                            alt="Pompa Kurulumu" 
+                            width={250} 
+                            height={136} 
+                            quality={60}
+                            loading="lazy" 
+                            decoding="async"
+                            />
+                         <Image 
+                            src={anasayfaResmi2} 
+                            alt="Kuyu Açma" 
+                            width={250} 
+                            height={136} 
+                            quality={60}
+                            loading="lazy" 
+                            decoding="async"
+                            />
+                         <Image 
+                            src={anasayfaResmi3} 
+                            alt="Teknik Ekip" 
+                            width={250} 
+                            height={136} 
+                            quality={60}
+                            loading="lazy" 
+                            decoding="async"
+                            />
                     </div>
                 </div>
             </div>
