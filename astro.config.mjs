@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 // import sitemap iptal edildi
 
 export default defineConfig({
-  site: 'https://unluturksondaj.com',
+  site: 'https://www.unluturksondaj.com',
   output: 'hybrid',
   adapter: vercel(),
   markdown: {
