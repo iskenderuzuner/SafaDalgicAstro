@@ -4,7 +4,7 @@ import keystatic from '@keystatic/astro';
 import markdoc from '@astrojs/markdoc';
 import vercel from '@astrojs/vercel/serverless';
 import remarkGfm from 'remark-gfm';
-// import sitemap iptal edildi
+// import sitemap iptal edildi..
 
 export default defineConfig({
   site: 'https://www.unluturksondaj.com',
