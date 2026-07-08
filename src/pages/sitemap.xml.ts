@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 export const prerender = true;
 
 export async function GET() {
-  const siteUrl = 'https://safadalgicpompa.com';
+  const siteUrl = 'https://unluturksondaj.com';
   const buildDate = new Date().toISOString(); // Sabit sayfalar için bugünün tarihi
 
   // 1. SABİT SAYFALAR (Tarihleri bugün olsun çünkü kod değiştiğinde bunlar da değişir)
