@@ -2,6 +2,7 @@
 import { getEntry, getCollection } from 'astro:content'; 
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { ViewTransitions } from 'astro:transitions';
+
 // Props: Sayfadan gelen özel başlık ve açıklama
 const { 
     title, 
@@ -132,8 +133,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     gtag('config', 'G-LWL807NJ5B');
     </script>
     
-    <!-- 🚀 Astro ClientRouter (Sayfa geçişlerini anında yapar) -->
-<ViewTransitions />
+    <!-- 🚀 Astro ViewTransitions (Sayfa geçişlerini anında yapar) -->
+    <ViewTransitions />
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -238,7 +239,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </footer>
 
-    <script src="/js/script.js" is:inline></script>
+    <!-- 🚀 BURASI DEĞİŞTİ: script.js dosyasının sayfalar arası geçişte tekrar çalışması için data-astro-rerun eklendi -->
+    <script src="/js/script.js" is:inline data-astro-rerun></script>
+    
     <div class="mobile-contact-bar">
       <a href="tel:+905325406829" class="contact-btn btn-call">
         <i class="fas fa-phone-alt"></i>
@@ -324,7 +327,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </style>
 
-<!-- 🚀 JS Kodlarına data-astro-rerun Eklendi (ClientRouter ile çalışabilmesi için) -->
+<!-- 🚀 JS Kodlarına data-astro-rerun Eklendi (ViewTransitions ile çalışabilmesi için) -->
 <script data-astro-rerun>
   // 1. TELEFON NUMARASI FİLTRESİ (Sadece Rakam)
   const phoneInput = document.getElementById('phoneInput');
