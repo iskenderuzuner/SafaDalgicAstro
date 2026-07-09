@@ -1,8 +1,7 @@
 ---
 import { getEntry, getCollection } from 'astro:content'; 
 import SpeedInsights from "@vercel/speed-insights/astro";
-import { ClientRouter } from 'astro:transitions'; // 🚀 ClientRouter Eklendi
-
+import { ViewTransitions } from 'astro:transitions';
 // Props: Sayfadan gelen özel başlık ve açıklama
 const { 
     title, 
@@ -134,7 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </script>
     
     <!-- 🚀 Astro ClientRouter (Sayfa geçişlerini anında yapar) -->
-    <ClientRouter />
+<ViewTransitions />
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
