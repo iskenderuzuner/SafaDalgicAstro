@@ -8,7 +8,7 @@ const tumBloglar = await getCollection('blog');
 tumBloglar.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
 // 🚀 Dinamik Assets Resimlerini İçe Aktarma Mantığı
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/blog/*.{jpeg,jpg,png,gif,webp}');
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/blog/**/*.{jpeg,jpg,png,gif,webp}');
 ---
 
 <Layout 

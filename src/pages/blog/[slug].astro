@@ -26,7 +26,7 @@ const metinKisalt = (metin, limit = 50) => {
 };
 
 // 🚀 Dinamik Assets Resimlerini İçe Aktarma Mantığı
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/blog/*.{jpeg,jpg,png,gif,webp}');
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/blog/**/*.{jpeg,jpg,png,gif,webp}');
 const resimYolu = entry.data.image.replace('../../', '/src/');
 const kapakResmi = images[resimYolu];
 ---
