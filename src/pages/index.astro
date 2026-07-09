@@ -36,14 +36,22 @@ try {
 // Anasayfa için sadece son 3 tanesini al
 const sonYorumlar = yorumlar.slice(0, 3);
 const sonBloglar = blogYazilari.slice(0, 3);
+
+// 🚀 LCP (En Büyük İçerikli Boyama) için İlk Slider Resmini Tespit Etme
+const ilkSliderResmi = sliderVerileri.length > 0 
+    ? sliderVerileri[0].data.resim 
+    : 'https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=1920&auto=format&fit=crop';
 ---
 
 <Layout title="Su Kuyusu, Artezyen ve Pompa Sistemleri" description="İstanbul ve çevre illerde su sondajı, kuyu temizliği ve ruhsat hizmetleri. 7/24 Teknik Servis.">
 
+    <!-- 🚀 GİZLİ PRELOAD (Ön Yükleme): İlk slider resminin "şak diye" yüklenmesini sağlar -->
+    <img src={ilkSliderResmi} style="display: none;" fetchpriority="high" loading="eager" decoding="sync" alt="Preload" />
+
     <section id="anasayfa" class="hero-slider">
         
-        <button class="hero-arrow hero-prev" id="heroPrevBtn"><i class="fas fa-chevron-left"></i></button>
-        <button class="hero-arrow hero-next" id="heroNextBtn"><i class="fas fa-chevron-right"></i></button>
+        <button class="hero-arrow hero-prev" id="heroPrevBtn" aria-label="Önceki Slayt"><i class="fas fa-chevron-left"></i></button>
+        <button class="hero-arrow hero-next" id="heroNextBtn" aria-label="Sonraki Slayt"><i class="fas fa-chevron-right"></i></button>
 
         {sliderVerileri.length === 0 && (
             <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=1920&auto=format&fit=crop');">
@@ -74,7 +82,8 @@ const sonBloglar = blogYazilari.slice(0, 3);
                             alt="Profesyonel Sondaj Makinesi" 
                             width={800} 
                             height={600} 
-                            quality={60}
+                            format="webp"
+                            quality={80}
                             loading="lazy" 
                             decoding="async"
                             />
@@ -90,6 +99,7 @@ const sonBloglar = blogYazilari.slice(0, 3);
                             alt="Saha Çalışması" 
                             width={250} 
                             height={136} 
+                            format="webp"
                             quality={60}
                             loading="lazy" 
                             decoding="async"
@@ -99,6 +109,7 @@ const sonBloglar = blogYazilari.slice(0, 3);
                             alt="Pompa Kurulumu" 
                             width={250} 
                             height={136} 
+                            format="webp"
                             quality={60}
                             loading="lazy" 
                             decoding="async"
@@ -108,6 +119,7 @@ const sonBloglar = blogYazilari.slice(0, 3);
                             alt="Kuyu Açma" 
                             width={250} 
                             height={136} 
+                            format="webp"
                             quality={60}
                             loading="lazy" 
                             decoding="async"
@@ -117,6 +129,7 @@ const sonBloglar = blogYazilari.slice(0, 3);
                             alt="Teknik Ekip" 
                             width={250} 
                             height={136} 
+                            format="webp"
                             quality={60}
                             loading="lazy" 
                             decoding="async"
@@ -145,9 +158,10 @@ const sonBloglar = blogYazilari.slice(0, 3);
                                 decoding="async" 
                                 style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px;"
                             />
-                            </a>
+                        </a>
                         <div class="service-content">
-                            <h3><a href={`/hizmetler/${hizmet.slug}`}>{hizmet.data.title}</h3></a>
+                            <!-- 🚀 HTML Hatası Düzeldi (Etiket kapanış sırası) -->
+                            <h3><a href={`/hizmetler/${hizmet.slug}`}>{hizmet.data.title}</a></h3>
                             <p>{hizmet.data.description}</p>
                             <a href={`/hizmetler/${hizmet.slug}`} style="color: #004494; font-weight: bold; margin-top: 10px; display: inline-block;">
                                 İncele <i class="fas fa-arrow-right"></i>
@@ -162,7 +176,7 @@ const sonBloglar = blogYazilari.slice(0, 3);
 
     <section id="referanslar" class="testimonials-section" style="background-color: #f8f9fa; padding: 60px 0;">
         <div class="container">
-            <h2 class="section-title">Müşteri Yorumlarıı</h2>
+            <h2 class="section-title">Müşteri Yorumları</h2>
             <p class="section-subtitle">Bizi tercih eden müşterilerimizin düşünceleri.</p>
 
             <div class="testimonial-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
@@ -264,12 +278,9 @@ const sonBloglar = blogYazilari.slice(0, 3);
                 </div>
 
                 <div class="form-box">
-                    <form id="anasayfa-formu"
-  action="https://formsubmit.co/iskenderuzuner@gmail.com" 
-  method="POST"
-  class="contact-form">
+                    <form id="anasayfa-formu" action="https://formsubmit.co/iskenderuzuner@gmail.com" method="POST" class="contact-form">
                         <div class="form-group">
-                        <input type="text" name="_honey" style="display:none">
+                        <input type="text" name="_honey" style="display:none" aria-hidden="true">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
                         <input type="text" name="ad_soyad" required placeholder="Adınız Soyadınız">
@@ -298,4 +309,3 @@ const sonBloglar = blogYazilari.slice(0, 3);
     </section>
 
 </Layout>
-
