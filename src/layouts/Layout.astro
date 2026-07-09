@@ -137,14 +137,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="container">
             <div class="logo">
                 <a href="/">
-               <Image 
+                    <!-- 🚀 RETİNA EKRAN DÜZELTMESİ: Width 500 yapıldı, CSS ile 250px'e sıkıştırıldı -->
+                    <Image 
                       src={siteLogo} 
                       alt={veri.siteBaslik || "Ünlütürk Sondaj"} 
-                      width={250} 
+                      width={500} 
                       fetchpriority="high"
                       loading="eager"
                       decoding="sync"
-                      style="max-width: 250px; height: auto;"
+                      style="width: 250px; max-width: 100%; height: auto;"
                     />           
                 </a>
             </div>
@@ -153,11 +154,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
                 <ul id="menuList">
                     <li class="mobile-menu-header">
+                        <!-- 🚀 RETİNA EKRAN DÜZELTMESİ: Width 300 yapıldı, CSS ile 150px'e sıkıştırıldı -->
                         <Image 
                             src={siteLogo} 
                             alt={veri.siteBaslik || "Ünlütürk Sondaj Logo"} 
-                            width={150} 
-                            style="max-width: 150px; height: auto;" 
+                            width={300} 
+                            style="width: 150px; max-width: 100%; height: auto;" 
                           />
                         <i class="fas fa-times" id="menuClose"></i>
                     </li>
@@ -193,13 +195,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>Hakkımızda</h3>
+                    <!-- 🚀 RETİNA EKRAN DÜZELTMESİ: Width 400 yapıldı, CSS ile 200px'e sıkıştırıldı -->
                     <Image 
                         src={siteLogo} 
                         alt={veri.siteBaslik || "Ünlütürk Sondaj Kurumsal"} 
-                        width={200}
+                        width={400}
                         loading="lazy" 
                         class="footer-logo" 
-                        style="background:white; padding:5px; border-radius:4px; max-width: 200px; height: auto;" 
+                        style="background:white; padding:5px; border-radius:4px; width: 200px; max-width: 100%; height: auto;" 
                       />
                     <p>"Firmamız Marmara bölgesi genelinde sondaj, sondaj etüdü, dalgıç pompa satış ve servis hizmetleri vermekteyiz."</p>
                 </div>
@@ -227,7 +230,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Ünlü Türk Sondaj. Tüm Hakları Saklıdır.</p>
+                <p>© 2026 Ünlü Türk Sondaj. Tüm Hakları Saklıdır.</p>
             </div>
         </div>
     </footer>
@@ -271,10 +274,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     gap: 10px; 
     transition: background 0.3s;
   }
+
+  /* 🚀 ERİŞİLEBİLİRLİK KONTRAST DÜZELTMELERİ */
   .btn-call { background-color: #004494; }
   .btn-call:hover { background-color: #003370; }
-  .btn-whatsapp { background-color: #25D366; }
-  .btn-whatsapp:hover { background-color: #1ebc57; }
+  
+  /* WhatsApp rengi kontrast testinden geçecek şekilde doygun yeşile çekildi */
+  .btn-whatsapp { background-color: #10752b !important; color: #ffffff !important; }
+  .btn-whatsapp:hover { background-color: #0c5c21 !important; }
+  
+  /* Teklif Al butonu kontrastı geçmesi için tok turuncu yapıldı */
+  .btn-nav-cta {
+      background-color: #C25900 !important;
+      color: #ffffff !important;
+  }
+  .btn-nav-cta:hover {
+      background-color: #994600 !important;
+  }
+  /* ------------------------------------------------ */
+
   .contact-btn i { font-size: 20px; }
 
   @media (min-width: 769px) {
