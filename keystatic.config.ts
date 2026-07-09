@@ -13,7 +13,6 @@ export default config({
       path: 'src/content/ayarlar/genel',
       format: 'json',
       schema: {
-        // 1. Logo ve İkonlar
         logo: fields.image({
           label: 'Site Logosu',
           directory: 'public/images/genel',
@@ -26,16 +25,12 @@ export default config({
           publicPath: '/images/genel/',
           validation: { isRequired: true }
         }),
-
-        // 2. SEO ve Başlıklar
         siteTitle: fields.text({ label: 'Site Başlığı (Örn: Safa Dalgıç Pompa)' }),
         seoDescription: fields.text({ 
             label: 'SEO Açıklaması (Google Özeti)', 
             multiline: true 
         }),
         slogan: fields.text({ label: 'Üst Bar Slogan (Örn: 7/24 Hizmet)' }),
-
-        // 3. İletişim Bilgileri
         telefon: fields.text({ label: 'Telefon Numarası' }),
         email: fields.text({ label: 'E-Posta Adresi' }),
         adres: fields.text({ label: 'Açık Adres', multiline: true }),
@@ -44,10 +39,7 @@ export default config({
     }),
   },
 
-  // 2. KOLEKSİYONLAR (Hizmetler, Slider vb.)
   collections: {
-    
-    // --- HİZMETLERR (DÜZELTİLEN KISIM BURASI) ---
     hizmetler: collection({
       label: 'Hizmetlerimiz',
       slugField: 'title',
@@ -66,7 +58,6 @@ export default config({
           label: 'Sıralama No',
           defaultValue: 0,
         }),
-        // 👇 Resim ekleme özelliği eklendi 👇
         content: fields.markdoc({
           label: 'Hizmet İçeriği',
           options: {
@@ -76,11 +67,9 @@ export default config({
             },
           },
         }),
-        // 👆 
       },
     }),
 
-    // --- SLIDER ---
     slider: collection({
       label: 'Slider (Manşet)',
       slugField: 'title',
@@ -100,7 +89,7 @@ export default config({
       },
     }),
     
-    // --- BLOG ---
+    // 🚀 BLOG DÜZENLEMESİ (Resimler artık src/assets klasörüne gidiyor)
     blog: collection({
       label: 'Blog Yazıları',
       slugField: 'title',
@@ -112,8 +101,8 @@ export default config({
         date: fields.date({ label: 'Yayın Tarihi' }),
         image: fields.image({
           label: 'Kapak Resmi',
-          directory: 'public/images/blog',
-          publicPath: '/images/blog/',
+          directory: 'src/assets/images/blog', // FİZİKSEL KAYIT YERİ
+          publicPath: '../../assets/images/blog/', // MARKDOWN'A YAZILACAK GÖRELİ YOL
           validation: { isRequired: true },
         }),
         content: fields.document({
@@ -123,14 +112,13 @@ export default config({
             links: true,
             tables: true,
             images: {
-              directory: 'public/images/blog/icerik',
-              publicPath: '/images/blog/icerik/',
+              directory: 'src/assets/images/blog/icerik', // İÇERİK RESİMLERİ
+              publicPath: '../../assets/images/blog/icerik/', // İÇERİK GÖRELİ YOL
             },
         }),
       },
     }),
 
-    // --- MÜŞTERİ YORUMLARI ---
     yorumlar: collection({
       label: 'Müşteri Yorumları',
       slugField: 'isim',
@@ -147,6 +135,5 @@ export default config({
         }),
       },
     }),
-
   },
 });

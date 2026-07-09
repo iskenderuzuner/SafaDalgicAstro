@@ -2,10 +2,13 @@
 export const prerender = true; 
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets'; // 🚀 Astro Image Eklendi
 
-// Blogları çek ve tarihe göre sırala
 const tumBloglar = await getCollection('blog');
 tumBloglar.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+
+// 🚀 Dinamik Assets Resimlerini İçe Aktarma Mantığı
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/blog/*.{jpeg,jpg,png,gif,webp}');
 ---
 
 <Layout 
@@ -23,22 +26,39 @@ tumBloglar.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date
   <section class="blog-list-section">
     <div class="container">
       <div class="blog-grid">
-        <!-- 🚀 map fonksiyonuna index parametresi eklendi -->
-        {tumBloglar.map((yazi, index) => (
+        {tumBloglar.map((yazi, index) => {
+          // Resmi klasörden bul
+          const resimYolu = yazi.data.image.replace('../../', '/src/');
+          const yaziResmi = images[resimYolu];
+
+          return (
           <article class="blog-card">
             <div class="card-image">
               <a href={`/blog/${yazi.slug}`}>
-                <!-- 🚀 Dinamik PageSpeed: İlk resim hızlı (eager), diğerleri tembel (lazy) yüklenir. ViewTransitions eklendi. -->
-                <img 
-                  src={yazi.data.image} 
-                  alt={yazi.data.title} 
-                  width="400"
-                  height="250"
-                  loading={index === 0 ? "eager" : "lazy"} 
-                  fetchpriority={index === 0 ? "high" : "auto"}
-                  decoding={index === 0 ? "sync" : "async"}
-                  transition:name={`blog-img-${yazi.slug}`}
-                />
+                {yaziResmi ? (
+                  <Image 
+                    src={yaziResmi()} 
+                    alt={yazi.data.title} 
+                    width={400}
+                    height={250}
+                    loading={index === 0 ? "eager" : "lazy"} 
+                    fetchpriority={index === 0 ? "high" : "auto"}
+                    decoding={index === 0 ? "sync" : "async"}
+                    transition:name={`blog-img-${yazi.slug}`}
+                    style="width: 100%; height: 100%; object-fit: cover;"
+                  />
+                ) : (
+                  // Resim bulunamazsa veya eski formattaysa (Örn: /images/...) yedek resim göster
+                  <img 
+                    src={yazi.data.image} 
+                    alt={yazi.data.title} 
+                    width="400"
+                    height="250"
+                    loading={index === 0 ? "eager" : "lazy"} 
+                    transition:name={`blog-img-${yazi.slug}`}
+                    style="width: 100%; height: 100%; object-fit: cover;"
+                  />
+                )}
               </a>
             </div>
             <div class="card-content">
@@ -54,7 +74,7 @@ tumBloglar.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date
               <a href={`/blog/${yazi.slug}`} class="btn-read-more">Bağlantıya git..</a>
             </div>
           </article>
-        ))}
+        )})}
       </div>
     </div>
   </section>
@@ -62,71 +82,21 @@ tumBloglar.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date
 </Layout>
 
 <style>
-  /* Sayfa Başlığı */
-  .page-header {
-    background: #f4f4f4;
-    padding: 60px 0;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
+  .page-header { background: #f4f4f4; padding: 60px 0; text-align: center; border-bottom: 1px solid #ddd; }
   .page-header h1 { color: #004494; margin-bottom: 10px; font-size: 2.5rem; }
   .page-header p { color: #666; font-size: 1.1rem; }
-
-  /* Grid Yapısı */
   .blog-list-section { padding: 60px 0; }
-  .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-  }
-
-  /* Kart Tasarımı (Referans görseldeki gibi) */
-  .blog-card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 5px; /* Hafif yuvarlak köşe */
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .blog-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  }
-
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+  .blog-card { background: #fff; border: 1px solid #eee; border-radius: 5px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .blog-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
   .card-image { height: 220px; overflow: hidden; }
-  
-  /* 🚀 Görsellerin oranlarını koruması için boyutlandırma eklendi */
-  .card-image img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    transition: transform 0.5s; 
-    display: block;
-  }
-  
   .blog-card:hover .card-image img { transform: scale(1.05); }
-
   .card-content { padding: 25px; }
-  
   .date { display: block; font-size: 0.85rem; color: #999; margin-bottom: 10px; }
-  
   .card-content h3 { margin-bottom: 15px; font-size: 1.3rem; line-height: 1.4; }
   .card-content h3 a { color: #333; text-decoration: none; transition: color 0.3s; }
   .card-content h3 a:hover { color: #004494; }
-
   .card-content p { font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 20px; }
-
-  .btn-read-more {
-    display: inline-block;
-    background: #f4f4f4;
-    color: #333;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
+  .btn-read-more { display: inline-block; background: #f4f4f4; color: #333; padding: 10px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.3s; }
   .btn-read-more:hover { background: #004494; color: #fff; }
 </style>
