@@ -1,11 +1,10 @@
 ---
 export const prerender = true; 
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets'; // 🚀 Astro Image Eklendi
+import { Image } from 'astro:assets'; 
 
-// 🚀 Resimleri projeden dahil ediyoruz (Otomatik optimize olacaklar)
+// 🚀 Sadece taşıdığını belirttiğin resmi optimize ediyoruz
 import hakkimizdaResmi from '../assets/images/hakkimizda-sondaj.webp';
-import bannerResmi from '../assets/images/hizmetler/su-kuyusu-sondaji.webp';
 
 const pageTitle = "Hakkımızda";
 const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, dalgıç pompa ve zemin etüdü hizmetleri sunan çözüm ortağınız.";
@@ -99,7 +98,7 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
   </div>
 </Layout>
 
-<style define:vars={{ bgImage: `url('${bannerResmi.src}')` }}>
+<style>
   /* GENEL AYARLAR */
   .container {
     max-width: 1200px;
@@ -107,9 +106,9 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
     padding: 0 20px;
   }
   
-  /* 🚀 ÜST BANNER (Astro Optimizasyonlu Arka Plan) */
+  /* 🚀 ÜST BANNER (Public Klasöründen Sorunsuz Çeker) */
   .page-header {
-    background: linear-gradient(rgba(0,51,102,0.9), rgba(0,51,102,0.8)), var(--bgImage); 
+    background: linear-gradient(rgba(0,51,102,0.9), rgba(0,51,102,0.8)), url('/images/hizmetler/su-kuyusu-sondaji.webp'); 
     background-size: cover;
     background-position: center;
     color: white;
@@ -153,7 +152,7 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
     position: absolute;
     top: 20px;
     left: -10px;
-    background: #C25900; /* Kontrast uyumlu turuncu */
+    background: #C25900;
     color: white;
     padding: 10px 20px;
     font-weight: bold;
