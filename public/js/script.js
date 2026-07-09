@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Sayfa geçişlerinde kodların uyumaması için Astro tetikleyicisi
+document.addEventListener('astro:page-load', function() {
     
     // --- 1. MOBİL MENÜ MANTIĞI ---
     const menuToggle = document.getElementById('menuToggle');
@@ -7,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuOverlay = document.getElementById('menuOverlay');
 
     function toggleMenu() {
-        menuList.classList.toggle('active');
-        menuOverlay.classList.toggle('active');
+        if(menuList) menuList.classList.toggle('active');
+        if(menuOverlay) menuOverlay.classList.toggle('active');
     }
 
     if(menuToggle) menuToggle.addEventListener('click', toggleMenu);
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const servicesLink = document.getElementById('servicesLink');
     const dropdownContent = document.querySelector('.dropdown-content');
 
-    if(servicesLink) {
+    if(servicesLink && dropdownContent) {
         servicesLink.addEventListener('click', function(e) {
             // 1024px ve altı (Tablet & Mobil) için tıklama ile aç/kapat
             if (window.innerWidth <= 1024) {
@@ -42,77 +43,44 @@ document.addEventListener('DOMContentLoaded', function() {
     let heroInterval;
     
     function showHeroSlide(index) {
+        if (heroSlides.length === 0) return;
+        
+        // Sınır kontrolü
+        if (index >= heroSlides.length) currentHeroSlide = 0;
+        else if (index < 0) currentHeroSlide = heroSlides.length - 1;
+        else currentHeroSlide = index;
+
+        // Hepsinden active class'ını sil ve sadece seçili olana ekle
         heroSlides.forEach(slide => slide.classList.remove('active'));
-        heroSlides[index].classList.add('active');
-    }
-
-    function nextHeroSlide() {
-        currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
-        showHeroSlide(currentHeroSlide);
-    }
-
-    function prevHeroSlide() {
-        currentHeroSlide = (currentHeroSlide - 1 + heroSlides.length) % heroSlides.length;
-        showHeroSlide(currentHeroSlide);
+        heroSlides[currentHeroSlide].classList.add('active');
     }
 
     if(heroNextBtn) {
         heroNextBtn.addEventListener('click', () => {
-            nextHeroSlide();
+            showHeroSlide(currentHeroSlide + 1);
             resetHeroInterval();
         });
     }
     if(heroPrevBtn) {
         heroPrevBtn.addEventListener('click', () => {
-            prevHeroSlide();
+            showHeroSlide(currentHeroSlide - 1);
             resetHeroInterval();
         });
     }
 
     function resetHeroInterval() {
         clearInterval(heroInterval);
-        heroInterval = setInterval(nextHeroSlide, 5000);
-    }
-    
-    resetHeroInterval();
-
-     document.addEventListener('astro:page-load', () => {
-        const slides = document.querySelectorAll('.hero-slider .slide');
-        const prevBtn = document.getElementById('heroPrevBtn');
-        const nextBtn = document.getElementById('heroNextBtn');
-        let currentSlide = 0;
-    
-        function showSlide(index) {
-            // Sınır kontrolü
-            if (index >= slides.length) currentSlide = 0;
-            else if (index < 0) currentSlide = slides.length - 1;
-            else currentSlide = index;
-    
-            // Hepsinden active class'ını sil
-            slides.forEach(slide => slide.classList.remove('active'));
-            // Şu anki slayta active ekle
-            slides[currentSlide].classList.add('active');
-        }
-    
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                showSlide(currentSlide + 1);
-            });
-        }
-    
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                showSlide(currentSlide - 1);
-            });
-        }
-    
-        // 5 Saniyede bir otomatik geçiş
-        if (slides.length > 1) {
-            setInterval(() => {
-                showSlide(currentSlide + 1);
+        if (heroSlides.length > 1) {
+            heroInterval = setInterval(() => {
+                showHeroSlide(currentHeroSlide + 1);
             }, 5000);
         }
-    });
+    }
+    
+    // Slider varsa otomatik geçişi başlat
+    if (heroSlides.length > 0) {
+        resetHeroInterval();
+    }
 
     // --- 4. YORUMLAR SLIDER ---
     const track = document.getElementById('testimonialSlider');
@@ -121,19 +89,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const dotsContainer = document.getElementById('sliderDots');
         let currentSlideIndex = 0;
 
+        // Geçişlerde noktaların üst üste binmesini engellemek için temizle
+        if (dotsContainer) dotsContainer.innerHTML = '';
+
         slides.forEach((_, index) => {
             const dot = document.createElement('span');
             dot.classList.add('dot');
             if (index === 0) dot.classList.add('active');
             dot.addEventListener('click', () => moveToSlide(index));
-            dotsContainer.appendChild(dot);
+            if (dotsContainer) dotsContainer.appendChild(dot);
         });
 
-        const dots = Array.from(dotsContainer.children);
+        const dots = dotsContainer ? Array.from(dotsContainer.children) : [];
 
         function updateDots(index) {
             dots.forEach(dot => dot.classList.remove('active'));
-            dots[index].classList.add('active');
+            if (dots[index]) dots[index].classList.add('active');
         }
 
         function moveToSlide(index) {

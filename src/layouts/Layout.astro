@@ -84,14 +84,12 @@ const schemaData = {
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<!-- Google Tag Manager -->
 <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NKZ8CXP9');</script>
-<!-- End Google Tag Manager -->
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href={veri.favicon} />
     <title>{sayfaBasligi}</title>
@@ -111,7 +109,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="twitter:description" content={sayfaAciklamasi} />
     <meta name="twitter:image" content={shareImage} />
     
-    <!-- 🚀 PageSpeed Preconnect Eklentileri (Dış kaynaklara önceden bağlanarak hızı artırır) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -123,7 +120,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWL807NJ5B"></script>
     <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -133,15 +129,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     gtag('config', 'G-LWL807NJ5B');
     </script>
     
-    <!-- 🚀 Astro ViewTransitions (Sayfa geçişlerini anında yapar) -->
     <ViewTransitions />
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKZ8CXP9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <div class="top-bar">
+<div class="top-bar">
         <div class="container">
             <div class="top-slogan">
                 <i class="fas fa-tools"></i> {veri.slogan}
@@ -239,8 +232,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </footer>
 
-    <!-- 🚀 BURASI DEĞİŞTİ: script.js dosyasının sayfalar arası geçişte tekrar çalışması için data-astro-rerun eklendi -->
-    <script src="/js/script.js" is:inline data-astro-rerun></script>
+    <script src="/js/script.js" is:inline></script>
     
     <div class="mobile-contact-bar">
       <a href="tel:+905325406829" class="contact-btn btn-call">
@@ -264,13 +256,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     height: 60px;
     background: #fff;
     display: flex;
-    z-index: 9999; /* Her şeyin üstünde dursun */
-    box-shadow: 0 -2px 15px rgba(0,0,0,0.1); /* Hafif gölge */
+    z-index: 9999; 
+    box-shadow: 0 -2px 15px rgba(0,0,0,0.1); 
     font-family: system-ui, -apple-system, sans-serif;
   }
 
   .contact-btn {
-    flex: 1; /* İkisini eşit böler %50 - %50 */
+    flex: 1; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -278,20 +270,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     color: white;
     font-size: 16px;
     font-weight: 600;
-    gap: 10px; /* İkon ile yazı arası boşluk */
+    gap: 10px; 
     transition: background 0.3s;
   }
 
   /* 2. RENKLER */
   .btn-call {
-    background-color: #004494; /* SENİN TEMANIN MAVİSİ */
+    background-color: #004494; 
   }
   .btn-call:hover {
-    background-color: #003370; /* Üzerine gelince koyulaşsın */
+    background-color: #003370; 
   }
 
   .btn-whatsapp {
-    background-color: #25D366; /* WHATSAPP YEŞİLİ */
+    background-color: #25D366; 
   }
   .btn-whatsapp:hover {
     background-color: #1ebc57;
@@ -302,98 +294,100 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     font-size: 20px;
   }
 
-  /* 3. BİLGİSAYAR GÖRÜNÜMÜ (PC'de kocaman çubuk olmasın diye) */
+  /* 3. BİLGİSAYAR GÖRÜNÜMÜ */
   @media (min-width: 769px) {
     .mobile-contact-bar {
-      width: auto;      /* Tam ekran olmasın */
-      left: auto;       /* Sola yaslanmasın */
-      right: 20px;      /* Sağdan 20px boşluk */
-      bottom: 20px;     /* Alttan 20px boşluk */
+      width: auto;      
+      left: auto;       
+      right: 20px;      
+      bottom: 20px;     
       background: transparent;
       box-shadow: none;
-      flex-direction: column; /* Alt alta dizilsin */
-      gap: 10px;        /* Aralarında boşluk olsun */
+      flex-direction: column; 
+      gap: 10px;        
       height: auto;
     }
 
     .contact-btn {
       font-size: 14px;
-      width: 200px;     /* Sabit genişlik */
-      border-radius: 50px; /* Yuvarlak kenarlar */
+      width: 200px;     
+      border-radius: 50px; 
       padding: 12px 20px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
   }
-
 </style>
 
-<!-- 🚀 JS Kodlarına data-astro-rerun Eklendi (ViewTransitions ile çalışabilmesi için) -->
-<script data-astro-rerun>
-  // 1. TELEFON NUMARASI FİLTRESİ (Sadece Rakam)
-  const phoneInput = document.getElementById('phoneInput');
-
-  if (phoneInput) {
-    phoneInput.addEventListener('input', function(e) {
-      let value = this.value.replace(/[^0-9]/g, '');
-      if (value.length > 11) {
-        value = value.slice(0, 11);
-      }
-      this.value = value;
-    });
-  }
-</script>
-<script data-astro-rerun>
-  const form = document.getElementById('anasayfa-formu');
-  const messageDiv = document.getElementById('form-message');
-  const submitBtn = document.getElementById('submit-btn');
-
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const originalText = submitBtn.innerText;
-      submitBtn.innerText = 'GÖNDERİLİYOR...';
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.7';
-
-      const formData = new FormData(form);
-
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Accept': 'application/json' 
+<script>
+  document.addEventListener('astro:page-load', () => {
+    
+    // 1. TELEFON NUMARASI FİLTRESİ
+    const phoneInput = document.getElementById('phoneInput');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function(e) {
+        let value = this.value.replace(/[^0-9]/g, '');
+        if (value.length > 11) {
+          value = value.slice(0, 11);
         }
-      })
-      .then(response => {
-        if (response.ok) {
-          messageDiv.style.display = 'block';
-          messageDiv.style.backgroundColor = '#d4edda';
-          messageDiv.style.color = '#155724';
-          messageDiv.innerText = '✅ Mesajınız başarıyla gönderildi! Teşekkürler.';
-          form.reset(); 
-        } else {
-          throw new Error('Form gönderilemedi');
-        }
-      })
-      .catch(error => {
-        messageDiv.style.display = 'block';
-        messageDiv.style.backgroundColor = '#f8d7da';
-        messageDiv.style.color = '#721c24';
-        messageDiv.innerText = '❌ Bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
-      })
-      .finally(() => {
-        submitBtn.innerText = originalText;
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-        
-        setTimeout(() => {
-            messageDiv.style.display = 'none';
-        }, 5000);
+        this.value = value;
       });
-    });
-  }
+    }
+
+    // 2. FORM GÖNDERME İŞLEMİ
+    const form = document.getElementById('anasayfa-formu');
+    const messageDiv = document.getElementById('form-message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (form) {
+      form.onsubmit = function(e) {
+        e.preventDefault();
+
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = 'GÖNDERİLİYOR...';
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+              'Accept': 'application/json' 
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            messageDiv.style.display = 'block';
+            messageDiv.style.backgroundColor = '#d4edda';
+            messageDiv.style.color = '#155724';
+            messageDiv.innerText = '✅ Mesajınız başarıyla gönderildi! Teşekkürler.';
+            form.reset(); 
+          } else {
+            throw new Error('Form gönderilemedi');
+          }
+        })
+        .catch(error => {
+          messageDiv.style.display = 'block';
+          messageDiv.style.backgroundColor = '#f8d7da';
+          messageDiv.style.color = '#721c24';
+          messageDiv.innerText = '❌ Bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
+        })
+        .finally(() => {
+          submitBtn.innerText = originalText;
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          
+          setTimeout(() => {
+              messageDiv.style.display = 'none';
+          }, 5000);
+        });
+      };
+    }
+    
+  });
 </script>
+
 <SpeedInsights />
 </body>
 </html>
