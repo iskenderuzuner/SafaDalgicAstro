@@ -2,7 +2,8 @@
 import { getEntry, getCollection } from 'astro:content'; 
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { ViewTransitions } from 'astro:transitions';
-
+import { Image } from 'astro:assets';
+import siteLogo from '../assets/images/logo-unlutur-sondaj.webp'; // Logonun yeni yolu
 // Props: Sayfadan gelen özel başlık ve açıklama
 const { 
     title, 
@@ -15,39 +16,29 @@ const {
 // Ayarları Çek
 const genelAyarlar = await getEntry('ayarlar', 'genel');
 const veri = genelAyarlar ? genelAyarlar.data : {
-    // Veri yoksa varsayılanlar (Hata vermemesi için)
     telefon: "0532 540 68 29",
     email: "info@safadalgicpompa.com",
     adres: "Adres Belirtilmedi",
     slogan: "Safa Dalgıç Pompa",
-    logo: "/images/genel/logo.png", // Varsayılan logo yolu
+    logo: "/images/genel/logo-unluturksondaj.png", 
     favicon: "/favicon.svg",
     seoDescription: "Sondaj ve Dalgıç Pompa Hizmetleri"
 };
 
-// Hizmetleri Çek (Menü için)
 const tumHizmetler = await getCollection('hizmetler');
 tumHizmetler.sort((a, b) => a.data.order - b.data.order);
 
-// --- SEO MANTIĞI ---
-// 1. Başlık: "Hizmetler | Safa Pompa" formatı
-const sayfaBasligi = title ? `${title} | ${veri.siteBaslik || 'Safa Dalgıç Pompa'}` : (veri.siteBaslik || 'Safa Dalgıç Pompa');
-
-// 2. Açıklama: Sayfaya özel yoksa genel ayarı kullan
+const sayfaBasligi = title ? `${title} | ${veri.siteBaslik || 'Ünlütürk Sondaj'}` : (veri.siteBaslik || 'Ünlütürk Sondaj');
 const sayfaAciklamasi = description || veri.seoDescription;
 
-// 3. Otomatik URL ve Canonical
-const siteUrl = Astro.site ? Astro.site.href : "https://iskenderuzuner.web.tr";
+const siteUrl = Astro.site ? Astro.site.href : "https://unluturksondaj.com";
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 
-// 1. RESİM LİNKİ DÜZELTMESİ (Relative URL Sorunu Çözüldü)
-// Eğer resim "/images" ile başlıyorsa, başına site adresini (https://...) ekler.
 const hamResim = image || veri.logo;
 const shareImage = hamResim.startsWith('http') 
     ? hamResim 
     : new URL(hamResim, siteUrl).href;
 
-// 2. SCHEMA.ORG (Google İşletme Kimliği - GÜNCELLENDİ)
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
@@ -62,18 +53,16 @@ const schemaData = {
     "streetAddress": veri.adres,
     "addressLocality": "İstanbul",
     "addressCountry": "TR",
-    "postalCode": "34912" // Pendik Yenişehir Posta Kodu
+    "postalCode": "34912" 
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "40.9281093",  // TAM NOKTA ATIŞI KONUMUN
-    "longitude": "29.3093346" // TAM NOKTA ATIŞI KONUMUN
+    "latitude": "40.9281093",  
+    "longitude": "29.3093346" 
   },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-    ],
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     "opens": "00:00",
     "closes": "23:59"
   },
@@ -104,19 +93,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content={type} />
     <meta property="og:image" content={shareImage} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={sayfaBasligi} />
-    <meta name="twitter:description" content={sayfaAciklamasi} />
-    <meta name="twitter:image" content={shareImage} />
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://www.googletagmanager.com">
-
+    
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap"></noscript>
     
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
     
@@ -125,7 +112,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-LWL807NJ5B');
     </script>
     
@@ -150,22 +136,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="container">
             <div class="logo">
                 <a href="/">
-                  <img 
-                    src="/images/genel/logo-unlutur-sondaj.png" 
-                    alt={veri.siteBaslik} 
-                    width="250" 
-                    height="57" 
-                    fetchpriority="high"
-                    loading="eager"
-                    decoding="sync"
-                  />                </a>
+               <!-- 🚀 Vite/Rollup ile Optimize Edilmiş Ana Logo -->
+                    <Image 
+                      src={siteLogo} 
+                      alt={veri.siteBaslik} 
+                      width={250} 
+                      fetchpriority="high"
+                      loading="eager"
+                      decoding="sync"
+                      style="max-width: 250px; height: auto;"
+                    />           
+                </a>
             </div>
             
             <nav>
                 <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
                 <ul id="menuList">
                     <li class="mobile-menu-header">
-                        <img src="/images/genel/safa-dalgic-logo.webp" alt={veri.siteBaslik}>
+                        <Image 
+                            src={siteLogo} 
+                            alt={veri.siteBaslik} 
+                            width={150} 
+                            style="max-width: 150px; height: auto;" 
+                          />
                         <i class="fas fa-times" id="menuClose"></i>
                     </li>
                     <li><a href="/">Anasayfa</a></li>
@@ -200,7 +193,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>Hakkımızda</h3>
-                    <img src="/images/genel/safa-dalgic-logo.webp" alt={veri.siteBaslik} class="footer-logo" style="background:white; padding:5px; border-radius:4px;">
+                    <Image 
+                        src={siteLogo} 
+                        alt={veri.siteBaslik} 
+                        width={200}
+                        loading="lazy" 
+                        class="footer-logo" 
+                        style="background:white; padding:5px; border-radius:4px; max-width: 200px; height: auto;" 
+                      />
                     <p>"Firmamız Marmara bölgesi genelinde sondaj, sondaj etüdü, dalgıç pompa satış ve servis hizmetleri vermekteyiz."</p>
                 </div>
                 <div class="footer-col">
@@ -221,13 +221,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="footer-col gallery-preview">
                     <h3>Galeri</h3>
                     <div class="mini-gallery">
-                        <img src="/images/genel/anasayfa1.webp" alt="">
-                        <img src="/images/genel/anasayfa2.webp" alt="">
+                        <img src="/images/genel/anasayfa1.webp" alt="Galeri 1" loading="lazy">
+                        <img src="/images/genel/anasayfa2.webp" alt="Galeri 2" loading="lazy">
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Safa Dalgıç Pompa. Tüm Hakları Saklıdır.</p>
+                <p>© 2025 Ünlü Türk Sondaj. Tüm Hakları Saklıdır.</p>
             </div>
         </div>
     </footer>
@@ -247,7 +247,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
 <style>
-  /* 1. GENEL AYARLAR (Mobil Öncelikli) */
   .mobile-contact-bar {
     position: fixed;
     bottom: 0;
@@ -260,7 +259,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     box-shadow: 0 -2px 15px rgba(0,0,0,0.1); 
     font-family: system-ui, -apple-system, sans-serif;
   }
-
   .contact-btn {
     flex: 1; 
     display: flex;
@@ -273,67 +271,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     gap: 10px; 
     transition: background 0.3s;
   }
+  .btn-call { background-color: #004494; }
+  .btn-call:hover { background-color: #003370; }
+  .btn-whatsapp { background-color: #25D366; }
+  .btn-whatsapp:hover { background-color: #1ebc57; }
+  .contact-btn i { font-size: 20px; }
 
-  /* 2. RENKLER */
-  .btn-call {
-    background-color: #004494; 
-  }
-  .btn-call:hover {
-    background-color: #003370; 
-  }
-
-  .btn-whatsapp {
-    background-color: #25D366; 
-  }
-  .btn-whatsapp:hover {
-    background-color: #1ebc57;
-  }
-
-  /* İkon Ayarları */
-  .contact-btn i {
-    font-size: 20px;
-  }
-
-  /* 3. BİLGİSAYAR GÖRÜNÜMÜ */
   @media (min-width: 769px) {
     .mobile-contact-bar {
-      width: auto;      
-      left: auto;       
-      right: 20px;      
-      bottom: 20px;     
-      background: transparent;
-      box-shadow: none;
-      flex-direction: column; 
-      gap: 10px;        
-      height: auto;
+      width: auto; left: auto; right: 20px; bottom: 20px;     
+      background: transparent; box-shadow: none;
+      flex-direction: column; gap: 10px; height: auto;
     }
-
     .contact-btn {
-      font-size: 14px;
-      width: 200px;     
-      border-radius: 50px; 
-      padding: 12px 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 14px; width: 200px; border-radius: 50px; 
+      padding: 12px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
   }
 </style>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    
-    // 1. TELEFON NUMARASI FİLTRESİ
     const phoneInput = document.getElementById('phoneInput');
     if (phoneInput) {
       phoneInput.addEventListener('input', function(e) {
         let value = this.value.replace(/[^0-9]/g, '');
-        if (value.length > 11) {
-          value = value.slice(0, 11);
-        }
+        if (value.length > 11) value = value.slice(0, 11);
         this.value = value;
       });
     }
 
-    // 2. FORM GÖNDERME İŞLEMİ
     const form = document.getElementById('anasayfa-formu');
     const messageDiv = document.getElementById('form-message');
     const submitBtn = document.getElementById('submit-btn');
@@ -341,7 +308,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (form) {
       form.onsubmit = function(e) {
         e.preventDefault();
-
         const originalText = submitBtn.innerText;
         submitBtn.innerText = 'GÖNDERİLİYOR...';
         submitBtn.disabled = true;
@@ -352,9 +318,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         fetch(form.action, {
           method: 'POST',
           body: formData,
-          headers: {
-              'Accept': 'application/json' 
-          }
+          headers: { 'Accept': 'application/json' }
         })
         .then(response => {
           if (response.ok) {
@@ -363,9 +327,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             messageDiv.style.color = '#155724';
             messageDiv.innerText = '✅ Mesajınız başarıyla gönderildi! Teşekkürler.';
             form.reset(); 
-          } else {
-            throw new Error('Form gönderilemedi');
-          }
+          } else throw new Error('Form gönderilemedi');
         })
         .catch(error => {
           messageDiv.style.display = 'block';
@@ -377,14 +339,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           submitBtn.innerText = originalText;
           submitBtn.disabled = false;
           submitBtn.style.opacity = '1';
-          
-          setTimeout(() => {
-              messageDiv.style.display = 'none';
-          }, 5000);
+          setTimeout(() => { messageDiv.style.display = 'none'; }, 5000);
         });
       };
     }
-    
   });
 </script>
 

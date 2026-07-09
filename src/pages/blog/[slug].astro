@@ -48,7 +48,6 @@ const metinKisalt = (metin, limit = 50) => {
           </header>
 
           <div class="article-featured-image">
-             <!-- 🚀 PageSpeed LCP Optimizasyonu ve Astro ViewTransitions Eklendi -->
              <img 
                src={entry.data.image} 
                alt={entry.data.title} 
@@ -58,7 +57,7 @@ const metinKisalt = (metin, limit = 50) => {
                loading="eager"
                decoding="sync"
                transition:name={`blog-img-${entry.slug}`}
-               style="aspect-ratio: 16/9; object-fit: cover;"
+               style="width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block;"
              />
           </div>
 
@@ -142,11 +141,7 @@ const metinKisalt = (metin, limit = 50) => {
     margin-bottom: 30px;
     border-radius: 6px;
     overflow: hidden;
-  }
-  .article-featured-image img {
-    width: 100%;
-    height: auto;
-    display: block;
+    background-color: #f0f0f0; /* Yüklenene kadar boşluk tutar */
   }
 
   /* YAZI İÇERİĞİ */
@@ -157,7 +152,7 @@ const metinKisalt = (metin, limit = 50) => {
     color: #444;
   }
 
-  /* Markdown Başlıkları */
+  /* Markdown Başlıkları ve İçerikleri */
   .article-content :global(h2) {
     font-size: 1.5rem;
     color: #004494;
@@ -179,10 +174,15 @@ const metinKisalt = (metin, limit = 50) => {
     list-style-type: disc;
   }
   .article-content :global(li) { margin-bottom: 8px; }
+  
+  /* 🚀 Blog İçindeki (Markdown) Resimlerin Responsive Olması İçin */
   .article-content :global(img) {
     max-width: 100%;
+    height: auto;
     border-radius: 5px;
     margin: 20px 0;
+    display: block;
+    aspect-ratio: attr(width) / attr(height);
   }
 
   /* Yazı Sonu Teklif Butonu */
