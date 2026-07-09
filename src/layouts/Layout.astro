@@ -4,6 +4,7 @@ import SpeedInsights from "@vercel/speed-insights/astro";
 import { ViewTransitions } from 'astro:transitions';
 import { Image } from 'astro:assets';
 import siteLogo from '../assets/images/logo-unlutur-sondaj.webp'; // Logonun yeni yolu
+
 // Props: Sayfadan gelen özel başlık ve açıklama
 const { 
     title, 
@@ -136,10 +137,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="container">
             <div class="logo">
                 <a href="/">
-               <!-- 🚀 Vite/Rollup ile Optimize Edilmiş Ana Logo -->
-                    <Image 
+               <Image 
                       src={siteLogo} 
-                      alt={veri.siteBaslik} 
+                      alt={veri.siteBaslik || "Ünlütürk Sondaj"} 
                       width={250} 
                       fetchpriority="high"
                       loading="eager"
@@ -155,7 +155,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <li class="mobile-menu-header">
                         <Image 
                             src={siteLogo} 
-                            alt={veri.siteBaslik} 
+                            alt={veri.siteBaslik || "Ünlütürk Sondaj Logo"} 
                             width={150} 
                             style="max-width: 150px; height: auto;" 
                           />
@@ -195,7 +195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <h3>Hakkımızda</h3>
                     <Image 
                         src={siteLogo} 
-                        alt={veri.siteBaslik} 
+                        alt={veri.siteBaslik || "Ünlütürk Sondaj Kurumsal"} 
                         width={200}
                         loading="lazy" 
                         class="footer-logo" 
