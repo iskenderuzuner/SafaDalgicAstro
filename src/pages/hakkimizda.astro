@@ -1,6 +1,11 @@
 ---
 export const prerender = true; 
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets'; // 🚀 Astro Image Eklendi
+
+// 🚀 Resimleri projeden dahil ediyoruz (Otomatik optimize olacaklar)
+import hakkimizdaResmi from '../assets/images/hakkimizda-sondaj.webp';
+import bannerResmi from '../assets/images/hizmetler/su-kuyusu-sondaji.webp';
 
 const pageTitle = "Hakkımızda";
 const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, dalgıç pompa ve zemin etüdü hizmetleri sunan çözüm ortağınız.";
@@ -20,13 +25,23 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
     <div class="about-section">
       <div class="about-image-wrapper">
         <div class="experience-badge">20+ Yıllık Tecrübe</div>
-        <img src="/images/genel/hakkimizda-safa.webp" alt="Safa Sondaj Ekibi" class="about-image" />
+        <!-- 🚀 Optimize Edilmiş Hakkımızda Resmi (Eager ile hızlı yüklenir) -->
+        <Image 
+          src={hakkimizdaResmi} 
+          alt="Ünlütürk Sondaj Ekibi ve Makine Parkuru" 
+          class="about-image" 
+          width={600} 
+          height={400} 
+          fetchpriority="high"
+          loading="eager"
+          decoding="sync"
+        />
       </div>
 
       <div class="about-text">
         <h2 class="section-title">Biz Kimiz?</h2>
         <p>
-          **Safa Dalgıç Pompa ve Sondaj**, 2002 yılında İstanbul'da, yeraltı kaynaklarını en verimli şekilde yeryüzüne çıkarmak ve yönetmek amacıyla kurulmuştur. Sektöre küçük bir sondaj makinesiyle başlayan serüvenimiz, bugün geniş makine parkuru, uzman mühendis kadrosu ve yüzlerce başarılı referans ile devam etmektedir.
+          **Ünlütürk Sondaj**, 2002 yılında İstanbul'da, yeraltı kaynaklarını en verimli şekilde yeryüzüne çıkarmak ve yönetmek amacıyla kurulmuştur. Sektöre küçük bir sondaj makinesiyle başlayan serüvenimiz, bugün geniş makine parkuru, uzman mühendis kadrosu ve yüzlerce başarılı referans ile devam etmektedir.
         </p>
         <p>
           Sadece "kuyu açıp giden" bir firma değiliz. Biz, suyun jeofizik etüdünden başlayarak; sondajı, borulaması, pompa seçimi ve DSİ ruhsatlandırma süreçlerine kadar **anahtar teslim proje** üreten bir mühendislik firmasıyız.
@@ -56,7 +71,7 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
       </div>
       <div class="mv-card vision">
         <h3>Vizyonumuz</h3>
-        <p>Marmara Bölgesi'nin en güvenilir ve donanımlı sondaj firması olmak. "Safa Dalgıç Pompa yaptıysa sağlamdır" algısını koruyarak, sektörde kalite ve güvenliğin standartlarını belirlemek.</p>
+        <p>Marmara Bölgesi'nin en güvenilir ve donanımlı sondaj firması olmak. "Ünlütürk yaptıysa sağlamdır" algısını koruyarak, sektörde kalite ve güvenliğin standartlarını belirlemek.</p>
       </div>
     </div>
 
@@ -84,7 +99,7 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
   </div>
 </Layout>
 
-<style>
+<style define:vars={{ bgImage: `url('${bannerResmi.src}')` }}>
   /* GENEL AYARLAR */
   .container {
     max-width: 1200px;
@@ -92,9 +107,9 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
     padding: 0 20px;
   }
   
-  /* ÜST BANNER */
+  /* 🚀 ÜST BANNER (Astro Optimizasyonlu Arka Plan) */
   .page-header {
-    background: linear-gradient(rgba(0,51,102,0.9), rgba(0,51,102,0.8)), url('/images/hizmetler/su-kuyusu-sondaji.webp'); /* Arka plana varsa resim koyabilirsin */
+    background: linear-gradient(rgba(0,51,102,0.9), rgba(0,51,102,0.8)), var(--bgImage); 
     background-size: cover;
     background-position: center;
     color: white;
@@ -127,6 +142,9 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
   }
   .about-image {
     width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     border: 5px solid white;
@@ -135,12 +153,13 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
     position: absolute;
     top: 20px;
     left: -10px;
-    background: #ff6600;
+    background: #C25900; /* Kontrast uyumlu turuncu */
     color: white;
     padding: 10px 20px;
     font-weight: bold;
     border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+    box-shadow: 0 5px 15px rgba(194, 89, 0, 0.4);
+    z-index: 10;
   }
   .about-text {
     flex: 1.2;
@@ -150,7 +169,7 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
     color: #003366;
     font-size: 2rem;
     margin-bottom: 20px;
-    border-bottom: 3px solid #ff6600;
+    border-bottom: 3px solid #C25900;
     display: inline-block;
     padding-bottom: 5px;
   }
@@ -175,7 +194,7 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
     align-items: center;
   }
   .check-icon {
-    color: #ff6600;
+    color: #C25900;
     margin-right: 10px;
     font-weight: bold;
   }
@@ -198,7 +217,7 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
   }
   .mv-card.vision {
     background-color: #fff5eb;
-    border-color: #ff6600;
+    border-color: #C25900;
   }
   .mv-card h3 {
     font-size: 1.5rem;
@@ -206,7 +225,7 @@ const pageDescription = "2002'den beri İstanbul ve çevre illerde su sondajı, 
     font-weight: bold;
   }
   .mission h3 { color: #003366; }
-  .vision h3 { color: #d35400; }
+  .vision h3 { color: #C25900; }
 
   /* NEDEN BİZ */
   .why-us {
