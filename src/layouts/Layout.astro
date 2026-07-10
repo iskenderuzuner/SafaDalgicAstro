@@ -4,7 +4,10 @@ import SpeedInsights from "@vercel/speed-insights/astro";
 import { ViewTransitions } from 'astro:transitions';
 import { Image } from 'astro:assets';
 import siteLogo from '../assets/images/logo-unlutur-sondaj.webp'; // Logonun yeni yolu
-
+import anasayfaResmi1 from '../assets/images/anasayfa1.webp';
+import anasayfaResmi2 from '../assets/images/anasayfa2.webp';
+import anasayfaResmi3 from '../assets/images/anasayfa3.webp';
+import safaSondajResmi from '../assets/images/safa-sondaj-anasayfa.webp';
 // Props: Sayfadan gelen özel başlık ve açıklama
 const { 
     title, 
@@ -43,7 +46,7 @@ const shareImage = hamResim.startsWith('http')
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
-  "name": veri.siteBaslik || "Safa Dalgıç Pompa",
+  "name": veri.siteBaslik || "Ünlütürk Sondaj",
   "image": shareImage,
   "description": veri.seoDescription,
   "telephone": veri.telefon,
@@ -224,9 +227,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="footer-col gallery-preview">
                     <h3>Galeri</h3>
                     <div class="mini-gallery">
-                        <img src="/images/genel/anasayfa1.webp" alt="Galeri 1" loading="lazy">
-                        <img src="/images/genel/anasayfa2.webp" alt="Galeri 2" loading="lazy">
-                    </div>
+                      <Image 
+                          src={anasayfaResmi1} 
+                          alt="Sondaj Çalışması 1" 
+                          width={150} 
+                          height={150} 
+                          loading="lazy" 
+                          style="object-fit: cover; aspect-ratio: 1/1; border-radius: 4px;" 
+                      />
+                      <Image 
+                          src={anasayfaResmi2} 
+                          alt="Sondaj Çalışması 2" 
+                          width={150} 
+                          height={150} 
+                          loading="lazy" 
+                          style="object-fit: cover; aspect-ratio: 1/1; border-radius: 4px;" 
+                      />
+                      <Image 
+                          src={anasayfaResmi3} 
+                          alt="Sondaj Çalışması 3" 
+                          width={150} 
+                          height={150} 
+                          loading="lazy" 
+                          style="object-fit: cover; aspect-ratio: 1/1; border-radius: 4px;" 
+                      />
+                      <Image 
+                          src={safaSondajResmi} 
+                          alt="Ünlütürk Sondaj Sahası" 
+                          width={150} 
+                          height={150} 
+                          loading="lazy" 
+                          style="object-fit: cover; aspect-ratio: 1/1; border-radius: 4px;" 
+                      />
+                  </div>
                 </div>
             </div>
             <div class="footer-bottom">
